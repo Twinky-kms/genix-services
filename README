@@ -1,7 +1,7 @@
-litecoin-seeder
+pigeoncoin-seeder
 ===============
 
-Litecoin-seeder is a crawler for the Litecoin network, which exposes a list
+Pigeoncoin-seeder is a crawler for the Pigeoncoin network, which exposes a list
 of reliable nodes via a built-in DNS server.
 
 Features:
