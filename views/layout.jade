@@ -29,8 +29,8 @@ html
             $("#supply").text(parseFloat(json.data[0].supply.toPrecision(3)).toLocaleString()); // edit to 3 sigfig
             $("#difficulty").text(parseFloat(json.data[0].difficulty.toPrecision(3))); // edit to 3 sigfig
             $("#difficultyHybrid").text(json.data[0].difficultyHybrid);
-            $("#hashrate").text(json.data[0].hashrate);
-            $("#lastPrice").text(json.data[0].lastPrice.toFixed(8));
+            $("#hashrate").text(Number(json.data[0].hashrate).toPrecision(3));
+            $("#lastPrice").text( (json.data[0].lastPrice.toFixed(8) *1e8) + ' sats' );
             $("#lblConnections").text(json.data[0].connections + ' connections');
             $("#lblBlockcount").text(json.data[0].blockcount + ' blocks');
             $("#lblX1").text(' ');
