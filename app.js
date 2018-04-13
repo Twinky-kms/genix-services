@@ -57,6 +57,13 @@ app.use('/ext/getmoneysupply', function(req,res){
   });
 });
 
+app.use('/ext/getmoneysupplyint', function(req,res){
+  lib.get_supply(function(supply){
+    //supply = supply * 1e8; // remove that decimal
+    res.send(' '+supply.toString().replace('.',''));
+  });
+});
+
 app.use('/ext/getaddress/:hash', function(req,res){
   db.get_address(req.param('hash'), function(address){
     if (address) {
