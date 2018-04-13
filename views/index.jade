@@ -53,9 +53,9 @@ block content
         columns: [
           { data: 'blockindex', width: '8%' },
           { data: 'txid', width: '40%' },
-          { data: 'recipients', width:'5%' },
+          { data: 'recipients', width:'5%', class: 'visible-lg' },
           { data: 'total', width: '15%' },
-          { data: 'timestamp', width: '25%' },
+          { data: 'timestamp', width: '25%', class: 'visible-lg' },
         ]
       });
       setInterval( function () {
@@ -82,8 +82,8 @@ block content
         thead
           tr
             th.text-center #{settings.locale.ex_block}
-            th.hidden-xs.text-center #{settings.locale.tx_hash}
-            th.hidden-xs.text-center #{settings.locale.tx_recipients}
+            th.text-center #{settings.locale.tx_hash}
+            th.text-center #{settings.locale.tx_recipients}
             th.text-center #{settings.locale.mkt_amount} (#{settings.symbol})
             th.text-center #{settings.locale.timestamp}
         tbody.text-center
