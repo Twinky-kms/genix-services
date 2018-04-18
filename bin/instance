@@ -60,11 +60,12 @@ db.connect(dbString, function() {
   var http=require('http');
   http.createServer(app).listen(80);
 
-/*  http.createServer(function (req, res) {
+  /* redirect http > https
+  http.createServer(function (req, res) {
     res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
     res.end();
   }).listen(80);
-*/
+  */
 
   var server = require('https');
   var fs = require('fs');
@@ -83,5 +84,7 @@ db.connect(dbString, function() {
     debug('Express server listening on port ' + server.address().port);
   });
   */
+
+
 
 });
