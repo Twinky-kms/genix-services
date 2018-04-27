@@ -18,28 +18,14 @@ function main(){
   promiseJSON('https://explorer.pigeoncoin.org:8000')
     .then(json => {
     data = json;
-
-    /*
-    data.price
-    data.volume
-    data.marketCap
-    data.supply
-    data.hashrate
-    data.difficulty
-    data.blockTime
-    data.retarget
-    */
   })
 }
-
-
 
 
 
   //////////////////////
   // https functions
   //////////////////////
-
 
 function promiseJSON(url) {
   return new Promise((resolve, reject) => {
@@ -62,7 +48,7 @@ function promiseJSON(url) {
 
 
 //////////////////////
-// stripPrefix function
+// string functions
 //////////////////////
 
 function cleanMessage(message){
@@ -78,7 +64,6 @@ function cleanMessage(message){
 
   return result;
 }
-
 
 
 function getReply(cleanedMessage){
@@ -102,7 +87,6 @@ function getReply(cleanedMessage){
     'blocktime':    {response: `${data.blockTime.toFixed(1)} minutes`},
     'retarget':     {response: `${data.retarget} blocks, ${(data.retarget * data.blockTime / 60).toPrecision(2)} hours`},
 
-
     'pool':         {response: `https://pool.pigeoncoin.org/ *Supports development*\nOther pools can be found in ${faqChannel}`},
     'explorer':     {response: `https://explorer.pigeoncoin.org`},
     'website':      {response: `https://pigeoncoin.org`},
@@ -114,6 +98,12 @@ function getReply(cleanedMessage){
     'release':      {response: `https://github.com/Pigeoncoin/pigeoncoin/releases`},
     'donate':       {response: 'please donate!\n\nPigeoncoin: `PDiZ89gk5HMqwrcGp6Hs9WdgFALzLbD4HG` \nBitcoin: `1NaVP4cKiWY6MxSDkTCZ2kh5Xm3coA27Qv`'},
 
+    'twitter':      {response: `https://twitter.com/Pigeoncoin`},
+    'github':      {response: `https://github.com/Pigeoncoin`},
+    'reddit':      {response: `https://www.reddit.com/r/Pigeoncoin/`},
+    'telegram':      {response: `https://t.me/Pigeoncoin`},
+    'medium':      {response: `https://medium.com/@pigeoncoin`},
+
     'mobile':       {response: `keep an eye out for the roadmap!  ${newsChannel}`},
 
     'masternode':   {response: `never.`},
@@ -122,7 +112,6 @@ function getReply(cleanedMessage){
     'coingecko':       {response: `we're there! https://www.coingecko.com/en/coins/pigeoncoin`},
     'livecoinwatch':       {response: `livecoinwatch listing is in progress!`},
     'whattomine':       {response: `we need to be listed on Abucoins, Bitfinex, Bittrex, Binance, Cryptopia, HitBTC, Poloniex or YoBit first!`},
-
 
     'cryptobridge': {response: `we have trading pairs with Ravencoin, Litecoin, and Bitcoin on CryptoBridge! https://crypto-bridge.org/`},
     'cobinhood': {response: `we are speaking with Cobinhood and are expecting a determination around Q3 2018.`},
@@ -139,7 +128,6 @@ function getReply(cleanedMessage){
     'good bot': {files: ['./img/good-bot.jpg']},
 
     'stuck transaction': {response: `check this out https://bitzuma.com/posts/how-to-clear-a-stuck-bitcoin-transaction/`}
-
   }
 
   const shorthand = [
@@ -183,14 +171,9 @@ function getReply(cleanedMessage){
 }
 
 
-//msg.reply(`!price, !volume, !marketcap, !supply, !hashrate, !difficulty, !blocktime, !retarget :chart_with_upwards_trend:`);
-
-
-
   //////////////////////
-  // setup discord
+  // discord
   //////////////////////
-
 
 
 client.on('ready', () => {
@@ -202,16 +185,11 @@ client.on('message', message => {
     let replyObject = getReply(cleanMessage(message.content))
 
     if(replyObject){
-
       message.reply(replyObject.response, {
         files: replyObject.files
       });
     }
-
   }
 });
-
-
-
 
 client.login(settings.key);
