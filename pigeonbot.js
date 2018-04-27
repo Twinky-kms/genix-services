@@ -126,7 +126,9 @@ function getReply(cleanedMessage){
     'handsome boy': {files: ['./img/handsome-boy.jpg']},
     'nasdaq': {response: 'why not?'},
     'good bot': {files: ['./img/good-bot.jpg']},
-    'lorem ipsum': {response: 'dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'},
+    'lorem ipsum': {response: `dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`},
+    'birthday': {response: `March 21st!`},
+    'timestamp': {response: `Reuters 21/Mar/2018 China stays on the sidelines as Venezuela spirals downward.`},
 
     'stuck transaction': {response: `check this out https://bitzuma.com/posts/how-to-clear-a-stuck-bitcoin-transaction/`}
   }
@@ -146,6 +148,7 @@ function getReply(cleanedMessage){
 
     {key: 'airdrop', inherits: 'masternode'},
     {key: 'faucet', inherits: 'masternode'},
+    {key: 'securenode', inherits: 'masternode'},
 
     {key: 'cmc', inherits: 'coinmarketcap'},
 
