@@ -129,6 +129,7 @@ function getReply(cleanedMessage){
     'lorem ipsum': {response: `dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`},
     'birthday': {response: `March 21st!`},
     'timestamp': {response: `Reuters 21/Mar/2018 China stays on the sidelines as Venezuela spirals downward.`},
+    'lunch': {response: `<:pinchy:430547800363630602> <:butter:430811764003831812> :fork_and_knife:`},
 
     'stuck transaction': {response: `check this out https://bitzuma.com/posts/how-to-clear-a-stuck-bitcoin-transaction/`}
   }
