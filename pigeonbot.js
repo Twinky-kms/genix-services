@@ -126,6 +126,7 @@ function getReply(cleanedMessage){
     'handsome boy': {files: ['./img/handsome-boy.jpg']},
     'nasdaq': {response: 'why not?'},
     'good bot': {files: ['./img/good-bot.jpg']},
+    'lorem ipsum': {response: 'dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'},
 
     'stuck transaction': {response: `check this out https://bitzuma.com/posts/how-to-clear-a-stuck-bitcoin-transaction/`}
   }
