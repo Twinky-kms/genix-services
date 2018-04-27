@@ -1,6 +1,71 @@
 const settings = require('./settings');
+
 const Discord = require('discord.js');
 const client = new Discord.Client();
+
+const https = require('https');
+var data = {};
+
+
+
+main();
+
+setInterval( main , 1000*60*1)
+
+function main(){
+  promiseJSON('https://explorer.pigeoncoin.org:8000')
+    .then(json => {
+    data = json;
+
+/*    data.price = json.price
+    data.volume = 
+    data.marketCap = 
+    data.supply = 
+    data.hashrate = 
+    data.difficulty = 
+    data.blockTime = 
+    data.retarget = */
+  })
+}
+
+
+
+
+
+  //////////////////////
+  // https functions
+  //////////////////////
+
+
+function promiseJSON(url) {
+  return new Promise((resolve, reject) => {
+    https.get(url, res => {
+      res.setEncoding("utf8");
+      let body = "";
+
+      res.on("data", data => {
+        // save stream as body
+        body += data;
+      });
+
+      res.on("end", () => {
+        // resolve with the JSON object from the body!
+        resolve(JSON.parse(body));
+      });
+    });
+  });
+}
+
+
+
+
+
+
+  //////////////////////
+  // setup discord
+  //////////////////////
+
+
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -14,6 +79,52 @@ client.on('message', msg => {
   // channels
   //////////////////////
   var newsChannel = "<#428888110634500097>";
+  var faqChannel =  "<#427877188990402571>";
+
+
+
+  //////////////////////
+  // stats
+  //////////////////////
+
+
+  if (message.startsWith("!stats")){
+    msg.reply(`!price, !volume, !marketcap, !supply, !hashrate, !difficulty, !blocktime, !retarget :chart_with_upwards_trend:`);
+  }
+
+
+  if (message.startsWith("!price")){
+    msg.reply(`${data.price * 1e8} satoshi`);
+  }
+
+  if (message.startsWith("!volume")){
+    msg.reply(`${data.volume.toPrecision(2)} BTC per day`);
+  }
+
+  if (message.startsWith("!marketcap")){
+    msg.reply(`${data.marketCap.toPrecision(2)} BTC`);
+  }
+
+  if (message.startsWith("!supply")){
+    msg.reply(`${Number((data.supply / 1e6).toPrecision(2))}M PGN`);
+  }
+
+  if (message.startsWith("!hash")){
+    msg.reply(`${data.hashrate.toPrecision(2)} GH`);
+  }
+
+  if (message.startsWith("!diff")){
+    msg.reply(`${Math.round(data.difficulty)}`);
+  }
+
+  if (message.startsWith("!blocktime")){
+    msg.reply(`${data.blockTime.toPrecision(2)} minutes`);
+  }
+
+  if (message.startsWith("!retarget")){
+    msg.reply(`${data.retarget} blocks, ${(data.retarget * data.blockTime / 60).toPrecision(2)} hours`);
+  }
+
 
 
   //////////////////////
@@ -24,15 +135,17 @@ client.on('message', msg => {
       message.startsWith("!when pool")){
     msg.reply(`
       https://pool.pigeoncoin.org/ *Supports development*
-      https://blockcruncher.com/
-      https://pign.suprnova.cc/
-      https://pickaxe.pro/
-      http://alttank.ca/`);
+      Other pools can be found in ${faqChannel}`);
+  }
+
+  if (message.startsWith("!when explorer") ||
+      message.startsWith("!explorer")){
+    msg.reply('https://explorer.pigeoncoin.org');
   }
 
   if (message.startsWith("!when website") ||
       message.startsWith("!website")){
-    msg.reply('http://pigeoncoin.org');
+    msg.reply('https://pigeoncoin.org');
   }
 
   if (message.startsWith("!when exchange") ||
@@ -47,7 +160,7 @@ client.on('message', msg => {
 
   if (message.startsWith("!when whitepaper") ||
       message.startsWith("!whitepaper")){
-    msg.reply(`the X16S (shuffle) mini-whitepaper is here http://pigeoncoin.org/assets/X16S-whitepaper.pdf`);
+    msg.reply(`the X16S (shuffle) mini-whitepaper is here https://pigeoncoin.org/assets/X16S-whitepaper.pdf`);
   }
 
   if (message.startsWith("!whattomine")){
@@ -56,7 +169,7 @@ client.on('message', msg => {
 
   if (message.startsWith("!mining") ||
       message.startsWith("!miner")){
-    msg.reply(`http://pigeoncoin.org/mining`);
+    msg.reply(`https://pigeoncoin.org/mining`);
   }
 
 
@@ -104,7 +217,13 @@ client.on('message', msg => {
   if (message.startsWith("!when cmc") ||
       message.startsWith("!when coinmarketcap") ||
       message.startsWith("!when coin market cap") ){
-    msg.reply('when we have 15 BTC daily volume on all exchanges.');
+    msg.reply('when we have $100k USD daily volume on all exchanges.');
+  }
+
+  if (message.startsWith("!when coingecko") ||
+      message.startsWith("!when cg") ||
+      message.startsWith("!when coin gecko") ){
+    msg.reply('we updated Explorer API to meet their needs and have submitted a request for listing!');
   }
 
   if (message.startsWith("!when lcw") ||
@@ -167,6 +286,12 @@ client.on('message', msg => {
 
   if (message.startsWith("!surfin")){
     msg.reply(':surfer:\nhttps://www.youtube.com/watch?time_continue=80&v=gBexh377HbQ');
+  }
+
+  if (message.startsWith("!handsom")){
+    msg.reply('', {
+      files:['./img/handsome-boy.jpg']
+    });
   }
 
 
