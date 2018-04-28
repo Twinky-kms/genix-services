@@ -76,16 +76,17 @@ function getReply(cleanedMessage){
 
     'stats':        {response: `!price, !volume, !marketcap, !supply, !hashrate, !difficulty, !blocktime, !retarget :chart_with_upwards_trend:`},
     'blockchain':   {response: `${data.hashrate.toPrecision(2)} GH, ${Math.round(data.difficulty)} diff, ${data.blockTime.toFixed(1)} min/block, ${data.retarget} blocks and ${(data.retarget * data.blockTime / 60).toPrecision(2)} hours to retarget`},
-    'market':       {response: `we're trading at ${data.price * 1e8} satoshi, with ${data.volume.toPrecision(2)} BTC daily volume, and a ${data.marketCap.toPrecision(2)} BTC market cap`},
+    'market':       {response: `we're trading at ${data.price * 1e8} satoshis, with ${data.volume.toPrecision(2)} BTC daily volume, and a ${data.marketCap.toPrecision(2)} BTC market cap`},
 
-    'price':        {response: `${data.price * 1e8} satoshi`},
-    'volume':       {response: `${data.volume.toPrecision(2)} BTC per day`},
-    'marketcap':    {response: `${data.marketCap.toPrecision(2)} BTC`},
-    'supply':       {response: `${Number((data.supply / 1e6).toPrecision(2))}M PGN`},
-    'hashrate':     {response: `${data.hashrate.toPrecision(2)} GH`},
-    'difficulty':   {response: `${Math.round(data.difficulty)} for the next ${(data.retarget * data.blockTime / 60).toPrecision(2)} hours`},
-    'blocktime':    {response: `${data.blockTime.toFixed(1)} minutes`},
-    'retarget':     {response: `${data.retarget} blocks, ${(data.retarget * data.blockTime / 60).toPrecision(2)} hours`},
+    'price':        {response: `price is **${data.price * 1e8} satoshis**`},
+    'volume':       {response: `volume is **${data.volume.toPrecision(2)} BTC** per day`},
+    'marketcap':    {response: `market cap is **${data.marketCap.toPrecision(2)} BTC**`},
+    'supply':       {response: `circulating supply is **${Number((data.supply / 1e6).toPrecision(2))}M PGN**`},
+    'hashrate':     {response: `network hashrate is **${data.hashrate.toPrecision(2)} GH**.`},
+    'difficulty':   {response: `difficulty is **${Math.round(data.difficulty)}** for the next **${(data.retarget * data.blockTime / 60).toPrecision(2)} hours**.`},
+    'blocktime':    {response: `blocktime is approximately **${data.blockTime.toFixed(1)} minutes**, with a target of 1 minute`},
+    'blockheight':  {response: `blockheight is **${data.height.toLocaleString()} blocks**`},
+    'retarget':     {response: `difficulty will retarget in **${data.retarget} blocks** and **${(data.retarget * data.blockTime / 60).toPrecision(2)} hours**`},
 
     'pool':         {response: `https://pool.pigeoncoin.org/ *Supports development*\nOther pools can be found in ${faqChannel}`},
     'explorer':     {response: `https://explorer.pigeoncoin.org`},
@@ -120,16 +121,22 @@ function getReply(cleanedMessage){
     'binance': {response: 'when you donate all your Pigeon to `PDiZ89gk5HMqwrcGp6Hs9WdgFALzLbD4HG`'},
     'coinbase': {response: 'when you donate all your Pigeon and your first born child to `PDiZ89gk5HMqwrcGp6Hs9WdgFALzLbD4HG`'},
 
-    'moon': {response: `fly pigeon, fly! :rocket:`},
-    'lambo': {response: `when lambo?! When land!`},
-    'surfin': {response: `:surfer:\nhttps://www.youtube.com/watch?time_continue=80&v=gBexh377HbQ`},
-    'handsome boy': {files: ['./img/handsome-boy.jpg']},
-    'nasdaq': {response: 'why not?'},
-    'good bot': {files: ['./img/good-bot.jpg']},
-    'lorem ipsum': {response: `dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`},
     'birthday': {response: `March 21st!`},
     'timestamp': {response: `Reuters 21/Mar/2018 China stays on the sidelines as Venezuela spirals downward.`},
-    'lunch': {response: `<:pinchy:430547800363630602> <:butter:430811764003831812> :fork_and_knife:`},
+    'maxsupply': {response: `max supply is **21B PGN**`},
+    'blockreward': {response: `**5000 PGN** is awarded every minute`},
+
+    'moon': {reaction: '🚀'},
+    'lambo': {reaction: `when lambo?! When land!`},
+    'surfin': {response: `:surfer:\nhttps://www.youtube.com/watch?time_continue=80&v=gBexh377HbQ`},
+    'handsome boy': {files: ['./img/handsome-boy.jpg']},
+    'nasdaq': {reaction: '📈'},
+    'good bot': {reaction: '👍'},
+    'bad bot': {reaction: '👎'},
+    'lorem ipsum': {response: `dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`},
+
+    'lunch': {reaction: '430547800363630602'},
+    'pigeon soup': {reaction: ['🕊','430547800363630602','🧀','🍜']},
 
     'stuck transaction': {response: `check this out https://bitzuma.com/posts/how-to-clear-a-stuck-bitcoin-transaction/`}
   }
@@ -138,6 +145,7 @@ function getReply(cleanedMessage){
     {key: 'diff', inherits: 'difficulty'},
     {key: 'diff change', inherits: 'retarget'},
     {key: 'difficulty change', inherits: 'retarget'},
+    {key: 'height', inherits: 'blockheight'},
 
     {key: 'wallet', inherits: 'release'},
 
@@ -190,10 +198,32 @@ client.on('message', message => {
     let replyObject = getReply(cleanMessage(message.content))
 
     if(replyObject){
-      message.reply(replyObject.response, {
-        files: replyObject.files
-      });
+      let reaction = replyObject.reaction
+      let response = replyObject.response
+      let images = replyObject.files
+
+      // reactions
+      if(reaction) {
+        if(typeof reaction === 'string') reaction = [reaction]; // convert strings to arrays
+
+        for(emoji in reaction){
+          if(reaction[emoji].length > 10){
+            message.react(message.guild.emojis.get(reaction[emoji]))
+          }
+          else {
+            message.react(reaction[emoji])
+          }
+        }
+      }
+
+      // response
+      if(response || images){
+        message.reply(response, {
+          files: images
+        });
+      }
     }
+
   }
 });
 
