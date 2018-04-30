@@ -191,7 +191,7 @@ html
         form.form-inline(method='post', action='/search')      
           #index-search.form-group
             input.form-control(type='text', name='search', placeholder='#{settings.locale.ex_search_message}', style='min-width:80%;margin-right:5px;')
-            button.btn.btn-success(type='submit') #{settings.locale.ex_search_button}
+            button.btn.btn-default(type='submit') #{settings.locale.ex_search_button}
     block content
     .navbar.navbar-default.navbar-fixed-bottom.hidden-xs
       .col-md-4
@@ -214,7 +214,7 @@ html
         ul.nav
           li.text-center(style='margin-left:80px;margin-right:80px;')
             p(style='margin-top:15px;') 
-              a.navbar-link(href='https://github.com/iquidus/explorer', target='_blank') Powered by Iquidus Explorer 
+              a.navbar-link(href='https://pigeoncoin.org', target='_blank') © 2018 Pigeoncoin 
       span.connections
         label#lblBlockcount.label.label-default -
         label#lblConnections.label.label-default -

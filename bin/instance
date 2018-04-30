@@ -71,8 +71,10 @@ db.connect(dbString, function() {
   var fs = require('fs');
   var certRoot = '/etc/letsencrypt/live/explorer.pigeoncoin.org/';
 
+  //cert.pem  chain.pem  fullchain.pem  privkey.pem  READM
+
   var options = {
-  //ca: fs.readFileSync('ca.pem'),
+  ca: fs.readFileSync(certRoot + 'chain.pem'),
   cert: fs.readFileSync(certRoot + 'cert.pem'),
   key: fs.readFileSync(certRoot + 'privkey.pem'),
   };
