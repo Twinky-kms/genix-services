@@ -75,18 +75,18 @@ function getReply(cleanedMessage){
   let dictionary = {
 
     'stats':        {response: `!price, !volume, !marketcap, !supply, !hashrate, !difficulty, !blocktime, !retarget :chart_with_upwards_trend:`},
-    'blockchain':   {response: `${data.hashrate.toPrecision(2)} GH, ${Math.round(data.difficulty)} diff, ${data.blockTime.toFixed(1)} min/block, ${data.retarget} blocks and ${(data.retarget * data.blockTime / 60).toPrecision(2)} hours to retarget`},
-    'market':       {response: `we're trading at ${data.price * 1e8} satoshis, with ${data.volume.toPrecision(2)} BTC daily volume, and a ${data.marketCap.toPrecision(2)} BTC market cap`},
+    'blockchain':   {response: `${Number(data.hashrate.toPrecision(2))} GH, ${Math.round(data.difficulty)} diff, ${data.blockTime.toFixed(1)} min/block, ${data.retarget} blocks and ${Number((data.retarget * data.blockTime / 60).toPrecision(2))} hours to retarget`},
+    'market':       {response: `we're trading at ${data.price * 1e8} satoshis, with ${Number(data.volume.toPrecision(2))} BTC daily volume, and a ${Number(data.marketCap.toPrecision(2))} BTC market cap`},
 
     'price':        {response: `price is **${data.price * 1e8} satoshis**`},
-    'volume':       {response: `volume is **${data.volume.toPrecision(2)} BTC** per day`},
-    'marketcap':    {response: `market cap is **${data.marketCap.toPrecision(2)} BTC**`},
+    'volume':       {response: `volume is **${Number(data.volume.toPrecision(2))} BTC** per day`},
+    'marketcap':    {response: `market cap is **${Number(data.marketCap.toPrecision(2))} BTC**`},
     'supply':       {response: `circulating supply is **${Number((data.supply / 1e6).toPrecision(2))}M PGN**`},
-    'hashrate':     {response: `network hashrate is **${data.hashrate.toPrecision(2)} GH**.`},
-    'difficulty':   {response: `difficulty is **${Math.round(data.difficulty)}** for the next **${(data.retarget * data.blockTime / 60).toPrecision(2)} hours**.`},
+    'hashrate':     {response: `network hashrate is **${Number(data.hashrate.toPrecision(2))} GH**.`},
+    'difficulty':   {response: `difficulty is **${Math.round(data.difficulty)}** for the next **${Number((data.retarget * data.blockTime / 60).toPrecision(2))} hours**.`},
     'blocktime':    {response: `blocktime is approximately **${data.blockTime.toFixed(1)} minutes**, with a target of 1 minute`},
     'blockheight':  {response: `blockheight is **${data.height.toLocaleString()} blocks**`},
-    'retarget':     {response: `difficulty will retarget in **${data.retarget} blocks** and **${(data.retarget * data.blockTime / 60).toPrecision(2)} hours**`},
+    'retarget':     {response: `difficulty will retarget in **${data.retarget} blocks** and **${Number((data.retarget * data.blockTime / 60).toPrecision(2))} hours**`},
 
     'pool':         {response: `https://pool.pigeoncoin.org/ *Supports development*\nOther pools can be found in ${faqChannel}`},
     'explorer':     {response: `https://explorer.pigeoncoin.org`},
@@ -162,7 +162,8 @@ function getReply(cleanedMessage){
     {key: 'cmc', inherits: 'coinmarketcap'},
 
     {key: 'cb', inherits: 'cryptobridge'},
-    {key: 'gdax', inherits: 'coinbase'}
+    {key: 'gdax', inherits: 'coinbase'},
+    {key: 'thanks bot', inherits: 'good bot'}
   ]
 
 
