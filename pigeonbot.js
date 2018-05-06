@@ -198,6 +198,14 @@ client.on('message', message => {
   if( message.content.trim().startsWith('!') ){
     let replyObject = getReply(cleanMessage(message.content))
 
+
+
+    // reply is allowed if the role is hoisted from @everyone
+    // and the message is not in general
+    // reactions are allowed anywhere
+    const generalId = 426188734858264583
+    const isAllowed = !!message.member.roles.find("hoist", true) || message.channel.id != generalId
+
     if(replyObject){
       let reaction = replyObject.reaction
       let response = replyObject.response
@@ -218,7 +226,7 @@ client.on('message', message => {
       }
 
       // response
-      if(response || images){
+      if((response || images) && isAllowed){
         message.reply(response, {
           files: images
         });
