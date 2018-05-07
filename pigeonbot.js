@@ -198,13 +198,11 @@ client.on('message', message => {
   if( message.content.trim().startsWith('!') ){
     let replyObject = getReply(cleanMessage(message.content))
 
-
-
     // reply is allowed if the role is hoisted from @everyone
     // and the message is not in general
     // reactions are allowed anywhere
-    const generalId = 426188734858264583
-    const isAllowed = !!message.member.roles.find("hoist", true) || message.channel.id != generalId
+    const spamChannel = 439057355968217088
+    const isAllowed = message.channel.id == spamChannel || !!message.member.roles.find("hoist", true)
 
     if(replyObject){
       let reaction = replyObject.reaction
@@ -226,11 +224,27 @@ client.on('message', message => {
       }
 
       // response
-      if((response || images) && isAllowed){
-        message.reply(response, {
-          files: images
-        });
+      if((response || images)){
+          // are they allowed to bot in this channe?
+          if(isAllowed){
+              // reply in channel
+              message.reply(response, {
+                files: images
+              });
+          }else{
+              // delete message
+              // PM sender
+              message.react('👋')
+                .then(message.delete(2000))
+
+              message.author.sendMessage(response, {
+                files: images
+              })
+          }
       }
+    }else{
+        message.react('❓')
+          .then(message.delete(2000))
     }
 
   }
