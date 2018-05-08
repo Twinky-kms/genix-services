@@ -202,7 +202,17 @@ client.on('message', message => {
     // and the message is not in general
     // reactions are allowed anywhere
     const spamChannel = 439057355968217088
-    const isAllowed = message.channel.id == spamChannel || !!message.member.roles.find("hoist", true)
+    let hoisted = null
+    let privateMessage = null
+
+
+    if(message.member){
+        hoisted = !!message.member.roles.find("hoist", true)
+    }else{
+        privateMessage = true
+    }
+
+    const isAllowed = message.channel.id == spamChannel || hoisted || privateMessage
 
     if(replyObject){
       let reaction = replyObject.reaction
@@ -237,7 +247,7 @@ client.on('message', message => {
               message.react('👋')
                 .then(message.delete(2000))
 
-              message.author.sendMessage(response, {
+              message.author.send(response, {
                 files: images
               })
           }
