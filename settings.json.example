@@ -1,3 +1,11 @@
 {
-  "key":"yourBotToken"
+  "key":"yourDiscordToken",
+  "firebase":{
+    "apiKey": "JSdkfjslfjslJFSLDkfjsdlkfjsd",
+    "authDomain": "your-project.firebaseapp.com",
+    "databaseURL": "https://your-project.firebaseio.com",
+    "projectId": "your-project",
+    "storageBucket": "your-project.appspot.com",
+    "messagingSenderId": "435783658734"
+  }
 }

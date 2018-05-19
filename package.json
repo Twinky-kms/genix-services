@@ -1,0 +1,33 @@
+{
+  "name": "pigeonbot",
+  "version": "1.0.0",
+  "description": "Discord and Firebase come together to make a superbot",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "firebase": "^5.0.3",
+    "string-similarity": "^1.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pigeoncoin/pigeonbot.git"
+  },
+  "keywords": [
+    "Discord",
+    "Firebase",
+    "Bitcoin"
+  ],
+  "author": "Luke Pighetti",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Pigeoncoin/pigeonbot/issues"
+  },
+  "homepage": "https://github.com/Pigeoncoin/pigeonbot#readme"
+}
