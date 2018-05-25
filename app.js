@@ -7,7 +7,7 @@ const settings = require('./settings');
 const Discord = require('discord.js');
 
 const client = new Discord.Client();
-client.login(settings.key);
+client.login(settings.discordKey);
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -33,9 +33,9 @@ latestRef.on('value', snap => {
 })
 
 // listen for new messages
-client.on('message', message => {
+client.on('message', async (message) => {
   if( message.content.trim().startsWith('!') ){
-    const reply = getReply(message.content, latestData)
+    const reply = await getReply(message, latestData)
 
     sendReply(message, reply)
   }
