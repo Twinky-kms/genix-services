@@ -55,6 +55,7 @@ function updateLegacyData(){
 
   if(latestData){
     let legacyLatestData = {
+      "_id": randomId(),
       "price": latestData.market.priceBtc,
       "volume": latestData.market.volumeBtc,
       "supply": latestData.chain.supply,
@@ -114,3 +115,22 @@ app.get('/v2/latestData/', (req, res) => res.send(latestData))
 
 //  historyData /v2/historyData/
 app.get('/v2/historyData/', (req, res) => res.send(historyData))
+
+
+
+
+
+
+
+
+// UTILITIES
+
+function randomId() {
+  const length = 24
+  const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  let result = '';
+
+  for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+
+  return result;
+}
