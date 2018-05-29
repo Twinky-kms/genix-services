@@ -1,0 +1,21 @@
+{
+  "name": "public-api",
+  "version": "1.0.0",
+  "description": "Pull data from firebase, make available via express ",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Firebase",
+    "Express",
+    "public",
+    "api"
+  ],
+  "author": "Luke Pighetti",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^5.0.4"
+  }
+}
