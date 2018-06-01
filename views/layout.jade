@@ -127,11 +127,11 @@ html
                 a.navbar-link(href='/info')
                   span.glyphicon.glyphicon-info-sign
                   span.menu-text #{settings.locale.menu_api}
-            if settings.display.newWallet == true
+            if settings.display.notice.show == true
               li#info
-                a.navbar-link(href='https://github.com/Pigeoncoin/pigeoncoin/releases/tag/v0.15.99.2')
-                  span.fa.fa-exclamation-triangle(style="color:red;")
-                  span.menu-text(style="color:red;") Update your wallet to v15.99.2 before Monday June 4th 2018!
+                a.navbar-link(href='#{settings.display.notice.address}')
+                  span.fa.fa-exclamation-triangle(style="color:#{settings.display.notice.color};")
+                  span.menu-text(style="color:red;") #{settings.display.notice.text}
     .col-md-12
       .row.text-center
         .col-md-2.col-md-offset-1
