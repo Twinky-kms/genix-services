@@ -32,3 +32,7 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /pigeoncoin \
   && apt-get remove -y git libboost-all-dev
+
+COPY "pigeon.conf" "/root/.pigeon/pigeon.conf"
+VOLUME "/root/.pigeon"
+CMD ["pigeond", "-printtoconsole"]
