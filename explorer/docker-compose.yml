@@ -3,22 +3,18 @@ services:
   pigeoncoin:
     build: ./pigeoncoin
     restart: always
-    ports:
-      - "8757:8757"
 
   mongo:
     build: ./db
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password
       MONGO_INITDB_DATABASE: explorer_database
 
   explorer:
     build: ./express
     restart: always
     ports:
-      - "3001:3001"
+      - "3000:3001"
     depends_on:
       - mongo
       - pigeoncoin
