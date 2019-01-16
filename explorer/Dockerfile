@@ -8,4 +8,4 @@ RUN apk update \
   && cp ./settings.json.template ./settings.json \
   && npm install --production 
 
-CMD ["node","app.js"]
+CMD ["npm","start"]
