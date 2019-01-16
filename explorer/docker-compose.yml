@@ -1,14 +1,13 @@
 version: "3"
 services:
   pigeoncoin:
-    image: lukepighetti/pigeon-docker
+    build: ./pigeoncoin
     restart: always
     ports:
       - "8757:8757"
-    command: "pigeond -txindex -rpcuser=rpc_user -rpcpassword=rpc_password -rpcport=8757 -rpcallowip=0.0.0.0/0"
 
   mongo:
-    build: ./explorer-database
+    build: ./db
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
@@ -16,9 +15,7 @@ services:
       MONGO_INITDB_DATABASE: explorer_database
 
   explorer:
-    build:
-      dockerfile: Dockerfile
-      context: ./explorer
+    build: ./express
     restart: always
     ports:
       - "3001:3001"
