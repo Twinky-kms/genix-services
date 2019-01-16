@@ -92,14 +92,9 @@ function remove_lock(cb) {
 
 function is_locked(cb) {
   if ( database == 'index' ) {
-    var fname = './tmp/' + database + '.pid';
-    fs.exists(fname, function (exists){
-      if(exists) {
-        return cb(true);
-      } else {
-        return cb(false);
-      }
-    });
+    /// disable locking, its problematic.
+    /// PM2 won't allow duplicate processes anyway
+    return cb(false); 
   } else {
     return cb();
   } 

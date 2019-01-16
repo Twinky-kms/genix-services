@@ -10,21 +10,18 @@
       "name": "sync index update",
       "script": "./scripts/sync.js",
       "args": "index update",
-      "cron_restart": "*/1 * * * *",
-      "autorestart": false
+      "restart_delay": 60000
     },
     {
       "name": "sync market",
       "script": "./scripts/sync.js",
       "args": "market",
-      "cron_restart": "*/2 * * * *",
-      "autorestart": false
+      "restart_delay": 180000
     },
     {
       "name": "peers",
       "script": "./scripts/peers.js",
-      "cron_restart": "*/5 * * * *",
-      "autorestart": false
+      "restart_delay": 300000
     }
   ]
 }
