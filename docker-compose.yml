@@ -1,11 +1,11 @@
 version: "3"
 services:
-  # pigeoncoin:
-  #   image: lukepighetti/pigeon-docker
-  #   restart: always
-  #   ports:
-  #     - "8757:8757"
-  #   command: "pigeond -printtoconsole -txindex -rpcuser=rpc_user -rpcpassword=rpc_password -rpcport=8757 -rpcallowip=0.0.0.0/0"
+  pigeoncoin:
+    image: lukepighetti/pigeon-docker
+    restart: always
+    ports:
+      - "8757:8757"
+    command: "pigeond -txindex -rpcuser=rpc_user -rpcpassword=rpc_password -rpcport=8757 -rpcallowip=0.0.0.0/0"
 
   mongo:
     build: ./explorer-database
