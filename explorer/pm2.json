@@ -1,0 +1,30 @@
+{
+  "apps": [
+    {
+      "name": "explorer",
+      "script": "./bin/cluster",
+      "node_args": "--stack-size=10000",
+      "cron_restart": "30 21 * * *"
+    },
+    {
+      "name": "sync index update",
+      "script": "./scripts/sync.js",
+      "args": "index update",
+      "cron_restart": "*/1 * * * *",
+      "autorestart": false
+    },
+    {
+      "name": "sync market",
+      "script": "./scripts/sync.js",
+      "args": "market",
+      "cron_restart": "*/2 * * * *",
+      "autorestart": false
+    },
+    {
+      "name": "peers",
+      "script": "./scripts/peers.js",
+      "cron_restart": "*/5 * * * *",
+      "autorestart": false
+    }
+  ]
+}

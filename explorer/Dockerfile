@@ -1,11 +1,15 @@
-FROM node:lts-alpine
+FROM keymetrics/pm2:latest-alpine
 
-WORKDIR /explorer
-COPY . /explorer
+# Bundle APP files
+COPY . .
 
-RUN apk update \
-  && apk add python make \
-  && cp ./settings.json.template ./settings.json \
-  && npm install --production 
+# Install app dependencies
+ENV NPM_CONFIG_LOGLEVEL warn
+RUN npm install --production \
+  && cp ./settings.json.template ./settings.json 
 
-CMD ["npm","start"]
+# Show current folder structure in logs
+RUN ls -al -R
+
+CMD [ "pm2-runtime", "start", "pm2.json" ]
+
