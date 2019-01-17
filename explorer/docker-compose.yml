@@ -3,12 +3,16 @@ services:
   pigeoncoin:
     build: ./pigeoncoin
     restart: always
+    volumes:
+      - "chain_data:/root/.pigeon"
 
   mongo:
     build: ./db
     restart: always
     environment:
       MONGO_INITDB_DATABASE: explorer_database
+    volumes:
+      - "database_data:/data/db"
 
   explorer:
     build: ./express
@@ -18,4 +22,7 @@ services:
     depends_on:
       - mongo
       - pigeoncoin
-      
+
+volumes:
+  chain_data:
+  database_data:
