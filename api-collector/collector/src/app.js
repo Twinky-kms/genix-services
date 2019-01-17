@@ -14,9 +14,6 @@ const getAverage = require('./lib/getAverage.js')
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccountKey),
   databaseURL: config.firebase.databaseURL,
-  databaseAuthVariableOverride: {
-    uid: config.firebase.customUid
-  }
 });
 
 const db = admin.database()
@@ -42,6 +39,7 @@ blockNotify( async (blockHash) => {
 //    get pool data
 //    push it to latestData
 
+refreshPool();
 setInterval(refreshPool, 15*1000)
 
 var lastPool = ''
@@ -62,6 +60,7 @@ async function refreshPool(){
 //    get market data
 //    push it to latestData
 
+refreshMarket();
 setInterval(refreshMarket, 60*1000)
 
 var lastMarket = ''

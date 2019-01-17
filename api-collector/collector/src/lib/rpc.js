@@ -1,57 +1,61 @@
-const rpcClient = require('bitcoind-rpc')
-const config = require('../config/config.json')
+const config = require("../config/config.json");
+const axios = require("axios");
 
-const rpc = new rpcClient(config.rpc)
+/**
+ * Because bitcoind-rpc is junk, this is how you make an rpc request to bitcoind
+ * @param {string} command
+ * @param  {...any} args
+ */
+async function getRpc(command, ...args) {
+  const { protocol, user, pass, host, port } = config.rpc;
+  const url = `${protocol}://${user}:${pass}@${host}:${port}`;
 
+  const request = {
+    jsonrpc: "1.0",
+    method: command,
+    params: [...args]
+  };
 
-async function getMediantime(blockHeight){
-  const result = await getBlock(blockHeight)
-  return result.mediantime
+  const { data } = await axios.post(url, request);
+
+  return data.result;
 }
 
-async function getTime(blockHeight){
-  const result = await getBlock(blockHeight)
-  return result.time
+/**
+ * Get the median time of a block asynchronously
+ * @param {int} blockHeight
+ */
+async function getMediantime(blockHeight) {
+  const { mediantime } = await getBlock(blockHeight);
+  return mediantime;
 }
 
-
-///////
-
-function getBlock(blockHeight){
-  return new Promise((resolve, reject) => {
-
-    rpc.getblockhash(blockHeight, (error, response) => {
-      if(error){
-        reject(new Error(JSON.stringify(error)))
-      }
-
-      const blockHash = response.result
-
-      rpc.getblock(blockHash, (error, response) => {
-        if(error){
-          reject(new Error(JSON.stringify(error)))
-        }
-
-        resolve(response.result)
-      })
-    })
-  })
+/**
+ * Get the forge time of a block asynchronously
+ * @param {int} blockHeight
+ */
+async function getTime(blockHeight) {
+  const { time } = await getBlock(blockHeight);
+  return time;
 }
 
+/**
+ * Get the block information using the height
+ * @param {int} blockHeight
+ */
+async function getBlock(blockHeight) {
+  const blockhash = await getRpc("getblockhash", blockHeight);
+  const result = await getRpc("getblock", blockhash);
 
-function getMiningInfo(){
-  return new Promise((resolve, reject) => {
-    rpc.getmininginfo((error, response) => {
-      if(error){
-        reject(new Error(error))
-      }
-      resolve(response.result)
-    })
-  })
+  return result;
 }
 
+/**
+ * Get the current mining info
+ */
+async function getMiningInfo() {
+  const result = getRpc("getmininginfo");
+  return result;
+}
 
-///////////////////////////
-///////////////////////////
-
-module.exports = { getMiningInfo, getMediantime, getTime, getBlock}
+module.exports = { getMiningInfo, getMediantime, getTime, getBlock, getRpc };

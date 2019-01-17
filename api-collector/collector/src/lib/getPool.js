@@ -9,7 +9,7 @@ async function getPool(){
 
   try{
     const result = await axios.get('https://pool.pigeoncoin.org/api/currencies')
-    const data = result.data.PGN
+    const data = result.data['PGN']
 
     // get lastBlockTime
     const lastBlockTime = await rpc.getTime(data.lastblock)
@@ -28,6 +28,7 @@ async function getPool(){
   }
   catch(e){
     // pool API is not responding, we'll try again later
+    console.warn(`[getPool] pool API is not responding, is our local chain still syncing?`)
   }
 }
 
