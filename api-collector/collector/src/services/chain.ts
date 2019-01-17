@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Block, MiningInfo } from "./__types__/chain.types";
+import { BlockResponse, MiningInfoResponse } from "./__types__/chain.types";
 
 type Arguments = {
   protocol: string;
@@ -45,7 +45,7 @@ export class Chain {
       hash = heightOrHash;
     }
 
-    const block = await this.get<Block>("getblock", hash);
+    const block = await this.get<BlockResponse>("getblock", hash);
     return block;
   }
 
@@ -53,7 +53,7 @@ export class Chain {
    * Get current mining info
    */
   async getMiningInfo() {
-    const miningInfo = await this.get<MiningInfo>("getmininginfo");
+    const miningInfo = await this.get<MiningInfoResponse>("getmininginfo");
     return miningInfo;
   }
 }

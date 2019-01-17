@@ -1,4 +1,4 @@
-export type Block = {
+export type BlockResponse = {
   hash: string;
   confirmations: number;
   strippedsize: number;
@@ -19,7 +19,7 @@ export type Block = {
   nextblockhash: string;
 };
 
-export type MiningInfo = {
+export type MiningInfoResponse = {
   blocks: number;
   currentblockweight: number;
   currentblocktx: number;
