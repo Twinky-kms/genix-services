@@ -1,0 +1,9 @@
+{
+  "apps": [
+    {
+      "name": "bot",
+      "script": "./app.js",
+      "cron_restart": "30 21 * * *"
+    }
+  ]
+}
