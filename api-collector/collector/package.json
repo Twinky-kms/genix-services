@@ -19,6 +19,6 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bitcoind-rpc": "^0.7.1",
-    "firebase-admin": "^5.12.1"
+    "firebase-admin": "^6.5.0"
   }
 }
