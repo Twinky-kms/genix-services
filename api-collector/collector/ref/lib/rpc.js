@@ -54,8 +54,25 @@ async function getBlock(blockHeight) {
  * Get the current mining info
  */
 async function getMiningInfo() {
-  const result = getRpc("getmininginfo");
+  const result = await getRpc("getmininginfo");
   return result;
 }
 
-module.exports = { getMiningInfo, getMediantime, getTime, getBlock, getRpc };
+/**
+ * Get last block height
+ */
+
+async function getLastBlockHeight() {
+  const { bestblockhash } = await getRpc("getblockchaininfo");
+  const { height } = await getRpc("getblock", bestblockhash);
+  return height || 0;
+}
+
+module.exports = {
+  getMiningInfo,
+  getMediantime,
+  getTime,
+  getBlock,
+  getRpc,
+  getLastBlockHeight
+};

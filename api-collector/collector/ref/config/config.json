@@ -3,16 +3,15 @@
 		"protocol": "http",
 		"user": "rpc_user",
 		"pass": "rpc_password",
-		"host": "pigeoncoin",
+		"host": "localhost",
 		"port": "8757"
 	},
 	"http": {
-		"host": "localhost",
+		"host": "collector",
 		"port": 3001,
 		"exclusive": true
 	},
 	"firebase":{
-		"databaseURL":"https://pigeoncoin-api.firebaseio.com",
-		"customUid":"api-aggregator"
+		"databaseURL":"https://scratch-project-9f138.firebaseio.com"
 	}
 }
