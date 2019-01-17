@@ -1,0 +1,9 @@
+{
+  "apps": [
+    {
+      "name": "api-server",
+      "script": "./src/app.js",
+      "cron_restart": "30 21 * * *"
+    }
+  ]
+}
