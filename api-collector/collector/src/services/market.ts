@@ -1,5 +1,5 @@
 import axios from "axios";
-import { MarketData } from "./market_types";
+import { MarketData } from "./__types__/market.types";
 
 export class Market {
   private _url: string;

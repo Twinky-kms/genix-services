@@ -1,5 +1,5 @@
 import axios from "axios";
-import { PoolResponse, PoolData } from "./pool_types";
+import { PoolResponse, PoolData } from "./__types__/pool.types";
 
 export class Pool {
   private _url: string;

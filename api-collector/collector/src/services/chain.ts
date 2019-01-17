@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Block, MiningInfo } from "./chain_types";
+import { Block, MiningInfo } from "./__types__/chain.types";
 
 type Arguments = {
   protocol: string;
@@ -8,6 +8,7 @@ type Arguments = {
   host: string;
   port: number;
 };
+
 export class Chain {
   private _url: string;
 
