@@ -1,4 +1,4 @@
-FROM keymetrics/pm2:latest-alpine
+FROM keymetrics/pm2:10-alpine
 
 # Bundle APP files
 COPY . .
@@ -11,4 +11,3 @@ RUN npm install --production
 RUN ls -al -R
 
 CMD [ "pm2-runtime", "start", "pm2.json" ]
-
