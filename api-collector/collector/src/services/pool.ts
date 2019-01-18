@@ -1,7 +1,7 @@
 import axios from "axios";
 import { PoolResponse, PoolData } from "./__types__/pool.types";
 
-export class Pool {
+export class PoolService {
   private _url: string;
 
   constructor(yiimpUrl: string) {

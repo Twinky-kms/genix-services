@@ -1,4 +1,4 @@
-import { Chain } from "../chain";
+import { ChainService } from "../chain";
 
 const integrationConfig = {
   protocol: "http",
@@ -9,7 +9,7 @@ const integrationConfig = {
 };
 
 describe("Chain", () => {
-  const chain = new Chain(integrationConfig);
+  const chain = new ChainService(integrationConfig);
 
   it("gets a block by height", async () => {
     const { hash } = await chain.getBlock(1);

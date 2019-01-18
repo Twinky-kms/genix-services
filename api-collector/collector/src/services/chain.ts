@@ -9,7 +9,7 @@ type Arguments = {
   port: number;
 };
 
-export class Chain {
+export class ChainService {
   private _url: string;
 
   constructor({ protocol, user, pass, host, port }: Arguments) {

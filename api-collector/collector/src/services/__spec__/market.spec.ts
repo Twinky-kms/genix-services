@@ -1,9 +1,9 @@
-import { Market } from "../market";
+import { MarketService } from "../market";
 
 const integrationId = "litecoin";
 
 describe("Chain", () => {
-  const market = new Market(integrationId);
+  const market = new MarketService(integrationId);
 
   it("gets a response", async () => {
     const { priceBtc } = await market.getLatestData();

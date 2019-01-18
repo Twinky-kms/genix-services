@@ -1,7 +1,7 @@
 import axios from "axios";
 import { MarketData } from "./__types__/market.types";
 
-export class Market {
+export class MarketService {
   private _url: string;
 
   constructor(geckoId: string) {
