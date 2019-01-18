@@ -9,4 +9,5 @@ services:
     restart: always
     depends_on:
       - pigeoncoin
-      
+    environment:
+      RPC_HOST: pigeoncoin
