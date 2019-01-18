@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { MarketData } from "./__types__/market.types";
 
 export class MarketService {

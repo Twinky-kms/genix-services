@@ -1,18 +1,15 @@
 import axios from "axios";
-import { BlockResponse, MiningInfoResponse } from "./__types__/chain.types";
 
-type Arguments = {
-  protocol: string;
-  user: string;
-  pass: string;
-  host: string;
-  port: number;
-};
+import {
+  BlockResponse,
+  ChainServiceArguments,
+  MiningInfoResponse
+} from "./__types__/chain.types";
 
 export class ChainService {
   private _url: string;
 
-  constructor({ protocol, user, pass, host, port }: Arguments) {
+  constructor({ protocol, user, pass, host, port }: ChainServiceArguments) {
     this._url = `${protocol}://${user}:${pass}@${host}:${port}`;
   }
 

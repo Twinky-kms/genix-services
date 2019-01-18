@@ -19,7 +19,7 @@ export class PoolService {
       miners: poolResponse.workers,
       hashrate: poolResponse.hashrate,
       lastBlock: poolResponse.lastblock,
-      lastBlockTime,
+      lastBlockTime: Math.floor(lastBlockTime),
       dailyBlocks,
       timeToFind: (24 * 60 * 60) / dailyBlocks,
       timestamp: Math.floor(Date.now() / 1000)
