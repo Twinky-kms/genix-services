@@ -7,7 +7,7 @@
   // name your instance!
   "title": "Pigeoncoin",
 
-  "address": "127.0.0.1:3001",
+  "address": "127.0.0.1",
 
   // coin name
   "coin": "Pigeoncoin",

@@ -1,5 +1,11 @@
 version: "3"
 services:
+  proxy:
+    build: ./proxy
+    restart: always
+    ports:
+      - "3000:3000"
+
   pigeoncoin:
     build: ./explorer/pigeoncoin
     restart: always
@@ -17,8 +23,8 @@ services:
   explorer:
     build: ./explorer/express
     restart: always
-    ports:
-      - "3000:3001"
+    # ports:
+    #   - "3005:3001"
     depends_on:
       - mongo
       - pigeoncoin
@@ -30,8 +36,8 @@ services:
   api-server:
     build: ./api-server
     restart: always
-    ports:
-     - "3001:3001"
+    # ports:
+    #   - "3001:3001"
 
   api-collector:
     build: ./api-collector/collector
