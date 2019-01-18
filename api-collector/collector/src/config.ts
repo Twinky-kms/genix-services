@@ -5,27 +5,38 @@ const serviceAccountKey = require("./serviceAccountKey.json");
 import { ConfigArguments } from "./services/__types__/config.types";
 
 export const config: ConfigArguments = {
-  /// eg: http://rpc_user:rpc_password@localhost:8757
-  chain: {
-    protocol: "http",
-    user: "rpc_user",
-    pass: "rpc_password",
-    host: "localhost",
-    port: 8757
+  /// The interval for fetching latest data (in seconds) and historical data (in minutes)
+  main: {
+    intervalLatest: parseInt(process.env["FETCH_LATEST_SECONDS"] || "15"),
+    intervalHistorical: parseInt(
+      process.env["FETCH_HISTORICAL_MINUTES"] || "30"
+    ),
+    historicalPoints: parseInt(process.env["HISTORICAL_POINTS"] || "200"),
+    blocksPerPoint: parseInt(process.env["BLOCKS_PER_POINT"] || "140")
   },
 
-  /// the url for a yiimp pool
+  /// eg: http://rpc_user:rpc_password@localhost:8757
+  chain: {
+    protocol: process.env["RPC_PROTOCOL"] || "http",
+    user: process.env["RPC_USER"] || "rpc_user",
+    pass: process.env["RPC_PASSWORD"] || "rpc_password",
+    host: process.env["RPC_HOST"] || "localhost",
+    port: parseInt(process.env["RPC_PORT"] || "8757")
+  },
+
+  /// the url and coinId for a Yiimp pool
   pool: {
-    url: "https://pool.pigeoncoin.org",
-    coinId: "PGN"
+    url: process.env["POOL_URL"] || "https://pool.pigeoncoin.org",
+    coinId: process.env["POOL_COIN_ID"] || "PGN"
   },
 
   /// the CoinGecko coin id
-  market: "pigeoncoin",
+  market: process.env["GECKO_COIN_ID"] || "pigeoncoin",
 
   /// Firebase credential and databaseUrl
   database: {
     credential: admin.credential.cert(serviceAccountKey),
-    databaseURL: "https://scratch-project-9f138.firebaseio.com"
+    databaseURL:
+      process.env["RTDB_URL"] || "https://scratch-project-9f138.firebaseio.com"
   }
 };

@@ -7,13 +7,20 @@ import { MarketService } from "./services/market";
 import { PoolService } from "./services/pool";
 import { DatabaseService } from "./services/database";
 
+import { MainArguments } from "./services/__types__/main.types";
+
 /**
  * The entrypoint to the app. Handles dispatching actions to
  * the various services
  */
-main();
+main(config.main);
 
-async function main() {
+async function main({
+  intervalLatest,
+  intervalHistorical,
+  historicalPoints,
+  blocksPerPoint
+}: MainArguments) {
   admin.initializeApp(config.database);
 
   const db = new DatabaseService(admin.database());
@@ -25,10 +32,10 @@ async function main() {
   console.log(`ready to collect some data 🚀`);
 
   updateLatest();
-  setInterval(updateLatest, 15 * 1000);
+  setInterval(updateLatest, intervalLatest * 1000);
 
   updateHistorical();
-  setInterval(updateHistorical, 30 * 60 * 1000);
+  setInterval(updateHistorical, intervalHistorical * 60 * 1000);
 
   /**
    * Update the database with latest data
@@ -43,7 +50,10 @@ async function main() {
    * Update the database with historical data
    */
   async function updateHistorical() {
-    const chainHistoricalData = await chain.getHistoricalData();
+    const chainHistoricalData = await chain.getHistoricalData(
+      historicalPoints,
+      blocksPerPoint
+    );
 
     /// build a list of timestamps so we can build a matching list of historical data
     const timestamps = chainHistoricalData.map(c => c.timestamp);

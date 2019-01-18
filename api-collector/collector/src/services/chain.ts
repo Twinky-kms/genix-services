@@ -33,9 +33,11 @@ export class ChainService {
    * it seems to provide a great balance of recent data and historical data
    */
 
-  public async getHistoricalData(points = 200): Promise<ChainData[]> {
+  public async getHistoricalData(
+    points = 200,
+    blocksPerPoint = 140
+  ): Promise<ChainData[]> {
     const lastHeight = await this._get<number>("getblockcount");
-    const blocksPerPoint = 140;
 
     const blockNumbers = Array(points)
       .fill(null)
