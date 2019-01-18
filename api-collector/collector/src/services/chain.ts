@@ -19,7 +19,7 @@ export class ChainService {
 
   public async getLatestData(): Promise<ChainData> {
     const lastHeight = await this._get<number>("getblockcount");
-    const chainData = this._getChainData(lastHeight);
+    const chainData = this.getChainData(lastHeight);
     return chainData;
   }
 
@@ -27,7 +27,7 @@ export class ChainService {
    * Get chain data from block height
    */
 
-  private async _getChainData(height: number) {
+  public async getChainData(height: number) {
     const averageWindow = Math.min(72, height);
     const averagingHeight = height - averageWindow;
 
@@ -37,10 +37,12 @@ export class ChainService {
     const blockTime =
       (block.mediantime - averagingBlock.mediantime) / averageWindow;
 
+    const hashrate = (block.difficulty * Math.pow(2, 32)) / blockTime;
+
     const chainData: ChainData = {
-      blockTime,
+      blockTime: blockTime || 1,
       difficulty: block.difficulty,
-      hashrate: block.difficulty / blockTime,
+      hashrate: hashrate || 1,
       height: block.height,
       lastHash: block.hash,
       supply: block.height * 5000,
