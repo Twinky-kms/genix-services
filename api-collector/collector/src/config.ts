@@ -26,8 +26,8 @@ export const config: ConfigArguments = {
 
   /// the url and coinId for a Yiimp pool
   pool: {
-    url: process.env["POOL_URL"] || "https://pool.pigeoncoin.org",
-    coinId: process.env["POOL_COIN_ID"] || "PGN"
+    url: process.env["YIIMP_URL"] || "https://pool.pigeoncoin.org",
+    coinId: process.env["YIIMP_COIN_ID"] || "PGN"
   },
 
   /// the CoinGecko coin id
