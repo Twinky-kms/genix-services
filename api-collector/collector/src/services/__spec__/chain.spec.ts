@@ -37,6 +37,29 @@ describe("getChainData()", () => {
   });
 });
 
+describe("getHistoricalData()", () => {
+  const chain = new ChainService(integrationConfig);
+
+  it("handles 10", async () => {
+    const results = await chain.getHistoricalData(10);
+    for (const c of results) {
+      expectChainDataIsValid(c);
+    }
+  });
+
+  /// This test takes a long time but it is known to work
+  it.skip(
+    "handles 1000",
+    async () => {
+      const results = await chain.getHistoricalData(1000);
+      for (const c of results) {
+        expectChainDataIsValid(c);
+      }
+    },
+    100 * 1000
+  );
+});
+
 function expectChainDataIsValid(c: ChainData) {
   expect(typeof c.blockTime).toBe("number");
   expect(typeof c.difficulty).toBe("number");

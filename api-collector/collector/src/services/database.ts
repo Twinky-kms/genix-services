@@ -11,6 +11,8 @@ export class DatabaseService {
   private _marketRef = this._db.ref(`/latestData/market`);
   private _poolRef = this._db.ref(`/latestData/pool`);
 
+  private _historicalRef = this._db.ref(`/historicalData`);
+
   public async updateLatestChain(chainData: ChainData) {
     this._chainRef.update(chainData);
   }
@@ -21,5 +23,16 @@ export class DatabaseService {
 
   public async updateLatestPool(poolData: PoolData) {
     this._poolRef.update(poolData);
+  }
+
+  public async updateHistoricalChain(results: ChainData[]) {
+    const updateObject: Record<string, { chain: ChainData }> = {};
+
+    for (const chainData of results) {
+      const key = chainData.height;
+      updateObject[key] = { chain: chainData };
+    }
+
+    this._historicalRef.set(updateObject);
   }
 }

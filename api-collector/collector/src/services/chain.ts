@@ -24,6 +24,31 @@ export class ChainService {
   }
 
   /**
+   * Get the latest historical chain data
+   */
+
+  public async getHistoricalData(points = 240): Promise<ChainData[]> {
+    const lastHeight = await this._get<number>("getblockcount");
+    const blocksPerPoint = 140;
+
+    const blockNumbers = Array(points)
+      .fill(null)
+      .map((_, i) => lastHeight - i * blocksPerPoint)
+      .reverse();
+
+    /// This is a rudimentary throttle to reduce http request load
+    const promises = blockNumbers.map((height, i) =>
+      new Promise(r => setTimeout(r, i * 25)).then(_ =>
+        this.getChainData(height)
+      )
+    );
+
+    const results = await Promise.all(promises);
+
+    return results;
+  }
+
+  /**
    * Get chain data from block height
    */
 

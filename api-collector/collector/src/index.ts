@@ -19,9 +19,25 @@ async function main() {
 
   console.log(`ready to collect some data 🚀`);
 
-  setInterval(async () => {
+  updateLatest();
+  setInterval(updateLatest, 15 * 1000);
+
+  updateHistorical();
+  setInterval(updateHistorical, 10 * 60 * 1000);
+
+  /**
+   * Update the database with latest data
+   */
+  async function updateLatest() {
     db.updateLatestPool(await pool.getLatestData());
     db.updateLatestMarket(await market.getLatestData());
     db.updateLatestChain(await chain.getLatestData());
-  }, 15 * 1000);
+  }
+
+  /**
+   * Update the database with historical data
+   */
+  async function updateHistorical() {
+    db.updateHistoricalChain(await chain.getHistoricalData());
+  }
 }
