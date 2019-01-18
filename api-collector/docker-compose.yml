@@ -3,6 +3,8 @@ services:
   pigeoncoin:
     build: ./pigeoncoin
     restart: always
+    volumes:
+      - "chain_data:/root/.pigeon"
 
   collector:
     build: ./collector
@@ -13,3 +15,6 @@ services:
       RPC_HOST: pigeoncoin
       FETCH_HISTORICAL_MINUTES: 5
       RTDB_URL: https://scratch-project-9f138.firebaseio.com
+
+volumes: 
+  chain_data:
