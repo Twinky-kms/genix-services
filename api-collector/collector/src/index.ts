@@ -17,6 +17,11 @@ async function main() {
   const market = new MarketService(config.market);
   const pool = new PoolService(config.pool);
 
-  db.updateLatestPool(await pool.getLatestData());
-  console.log("updated pool!");
+  console.log(`ready to collect some data 🚀`);
+
+  setInterval(async () => {
+    db.updateLatestPool(await pool.getLatestData());
+    db.updateLatestMarket(await market.getLatestData());
+    db.updateLatestChain(await chain.getLatestData());
+  }, 15 * 1000);
 }

@@ -1,9 +1,9 @@
 import axios from "axios";
 
 import {
-  BlockResponse,
   ChainServiceArguments,
-  MiningInfoResponse
+  ChainData,
+  BlockResponse
 } from "./__types__/chain.types";
 
 export class ChainService {
@@ -14,9 +14,57 @@ export class ChainService {
   }
 
   /**
+   * get the latest chain data
+   */
+
+  public async getLatestData(): Promise<ChainData> {
+    const lastHeight = await this._get<number>("getblockcount");
+    const chainData = this._getChainData(lastHeight);
+    return chainData;
+  }
+
+  /**
+   * Get chain data from block height
+   */
+
+  private async _getChainData(height: number) {
+    const averageWindow = Math.min(72, height);
+    const averagingHeight = height - averageWindow;
+
+    const averagingBlock = await this._getBlock(averagingHeight);
+    const block = await this._getBlock(height);
+
+    const blockTime =
+      (block.mediantime - averagingBlock.mediantime) / averageWindow;
+
+    const chainData: ChainData = {
+      blockTime,
+      difficulty: block.difficulty,
+      hashrate: block.difficulty / blockTime,
+      height: block.height,
+      lastHash: block.hash,
+      supply: block.height * 5000,
+      timestamp: Math.floor(Date.now() / 1000)
+    };
+
+    return chainData;
+  }
+
+  // /**
+  //  * Get a block response from block height
+  //  */
+
+  private async _getBlock(height: number) {
+    const hash = await this._get<string>("getblockhash", height);
+    const blockResponse = await this._get<BlockResponse>("getblock", hash);
+
+    return blockResponse;
+  }
+
+  /**
    * Send a command and arguments to the bitcoin RPC server
    */
-  async get<T>(command: string, ...args: any) {
+  private async _get<T>(command: string, ...args: any) {
     const request = {
       jsonrpc: "1.0",
       method: command,
@@ -26,31 +74,5 @@ export class ChainService {
     const { data } = await axios.post<{ result: T }>(this._url, request);
 
     return data.result;
-  }
-
-  /**
-   * Get a block from block height
-   */
-
-  async getBlock(heightOrHash: number | string) {
-    var hash: string = "";
-
-    if (typeof heightOrHash == "number") {
-      const height = heightOrHash;
-      hash = await this.get<string>("getblockhash", height);
-    } else {
-      hash = heightOrHash;
-    }
-
-    const block = await this.get<BlockResponse>("getblock", hash);
-    return block;
-  }
-
-  /**
-   * Get current mining info
-   */
-  async getMiningInfo() {
-    const miningInfo = await this.get<MiningInfoResponse>("getmininginfo");
-    return miningInfo;
   }
 }

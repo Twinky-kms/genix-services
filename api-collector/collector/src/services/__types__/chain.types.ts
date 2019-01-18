@@ -19,18 +19,6 @@ export type BlockResponse = {
   nextblockhash: string;
 };
 
-export type MiningInfoResponse = {
-  blocks: number;
-  currentblockweight: number;
-  currentblocktx: number;
-  difficulty: number;
-  networkhashps: number;
-  hashespersec: number;
-  pooledtx: number;
-  chain: string;
-  warnings: string;
-};
-
 export type ChainData = {
   blockTime: number;
   difficulty: number;

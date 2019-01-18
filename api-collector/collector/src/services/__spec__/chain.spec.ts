@@ -11,25 +11,17 @@ const integrationConfig = {
 describe("Chain", () => {
   const chain = new ChainService(integrationConfig);
 
-  it("gets a block by height", async () => {
-    const { hash } = await chain.getBlock(1);
+  it("gets a correctly shaped response", async () => {
+    const c = await chain.getLatestData();
 
-    expect(hash).toBe(
-      "000000bf3ab765e3f2c75ae426539633e5f94af22b94c7da67652a1d3f6e770b"
-    );
-  });
+    expect(typeof c.blockTime).toBe("number");
+    expect(typeof c.difficulty).toBe("number");
+    expect(typeof c.hashrate).toBe("number");
+    expect(typeof c.height).toBe("number");
+    expect(typeof c.lastHash).toBe("string");
+    expect(typeof c.supply).toBe("number");
+    expect(typeof c.timestamp).toBe("number");
 
-  it("gets a block by hash", async () => {
-    const { height } = await chain.getBlock(
-      "000000bf3ab765e3f2c75ae426539633e5f94af22b94c7da67652a1d3f6e770b"
-    );
-
-    expect(height).toBe(1);
-  });
-
-  it("gets mining info", async () => {
-    const { blocks } = await chain.getMiningInfo();
-
-    expect(blocks).toBeTruthy();
+    expect(Object.keys(c).length).toBe(7);
   });
 });
