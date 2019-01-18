@@ -1,11 +1,31 @@
-# Installation
+# Setup
 
-Edit `/config/config.json`
+Put your Firebase private key in `/src/serviceAccountKey.json`
+Run in Docker, or `npm install && npm start`
 
-Put your `serviceAccountKey.json` from Firebase Console into `/config/`
+## Containerized
 
-Stick `blocknotify=curl -X PUT http://localhost:8080/%s` into `~/.pigeon/pigeon.conf`
+This is a stateless Docker service that relies on a Pigeoncoin core wallet,
+a Yiimp pool, CoinGecko, and a Firebase project for persistance.
 
-Run `npm start`
+## Environment Variable Defaults
 
-Enjoy!
+```
+FETCH_LATEST_SECONDS=15
+FETCH_HISTORICAL_MINUTES=30
+HISTORICAL_POINTS=200
+BLOCKS_PER_POINT=140
+
+RPC_PROTOCOL=http
+RPC_USER=rpc_user
+RPC_PASSWORD=rpc_password
+RPC_HOST=localhost
+RPC_PORT=8757
+
+YIIMP_URL=https://pool.pigeoncoin.org
+YIIMP_COIN_ID=PGN
+
+GECKO_COIN_ID=pigeoncoin
+
+RTDB_URL=https://scratch-project-9f138.firebaseio.com
+```
