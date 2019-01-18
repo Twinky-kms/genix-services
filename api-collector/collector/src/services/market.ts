@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { MarketData } from "./__types__/market.types";
+import { MarketData, MarketResponse } from "./__types__/market.types";
 
 export class MarketService {
   private _url: string;
@@ -10,7 +10,7 @@ export class MarketService {
   }
 
   async getLatestData() {
-    const { data } = await axios.get(this._url);
+    const { data } = await axios.get<MarketResponse>(this._url);
     const market = data.market_data;
 
     const marketData: MarketData = {
