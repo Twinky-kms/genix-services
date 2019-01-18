@@ -6,6 +6,9 @@ import {
   PoolServiceArguments
 } from "./__types__/pool.types";
 
+/**
+ * Gets data from a Yiimp pool and prepares it for persist
+ */
 export class PoolService {
   private _url: string;
   private _coinId: string;

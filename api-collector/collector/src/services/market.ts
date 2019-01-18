@@ -8,6 +8,9 @@ import {
   MarketResponse
 } from "./__types__/market.types";
 
+/**
+ * Gets data from CoinGecko and prepares it for persist
+ */
 export class MarketService {
   private _url: string;
 

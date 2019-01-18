@@ -6,6 +6,9 @@ import {
   BlockResponse
 } from "./__types__/chain.types";
 
+/**
+ * Provides access to chain data via bitcoin-style RPC connection and prepares it for persist
+ */
 export class ChainService {
   private _url: string;
 

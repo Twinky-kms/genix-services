@@ -4,6 +4,9 @@ import { ChainData } from "./__types__/chain.types";
 import { MarketData } from "./__types__/market.types";
 import { PoolData } from "./__types__/pool.types";
 
+/**
+ *  Persists data to Firebase Realtime Database
+ */
 export class DatabaseService {
   constructor(private _db: admin.database.Database) {}
 

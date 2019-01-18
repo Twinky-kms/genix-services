@@ -7,7 +7,12 @@ import { MarketService } from "./services/market";
 import { PoolService } from "./services/pool";
 import { DatabaseService } from "./services/database";
 
+/**
+ * The entrypoint to the app. Handles dispatching actions to
+ * the various services
+ */
 main();
+
 async function main() {
   admin.initializeApp(config.database);
 
@@ -40,7 +45,9 @@ async function main() {
   async function updateHistorical() {
     const chainHistoricalData = await chain.getHistoricalData();
 
+    /// build a list of timestamps so we can build a matching list of historical data
     const timestamps = chainHistoricalData.map(c => c.timestamp);
+
     const marketHistoricalData = await market.getHistoricalData(timestamps);
 
     db.updateHistoricalData(chainHistoricalData, marketHistoricalData);
