@@ -4,27 +4,21 @@
   "description": "Aggregate APIs and make a rolling average available via Firebase",
   "main": "app.js",
   "scripts": {
-    "start": "node src/app.js",
+    "start": "ts-node src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "Pigeoncoin",
-    "API",
-    "Firebase",
-    "CoinGecko",
-    "Bitcoin"
-  ],
+  "keywords": [],
   "author": "Luke Pighetti",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
-    "bitcoind-rpc": "^0.7.1",
     "firebase-admin": "^6.5.0"
   },
   "devDependencies": {
     "@types/jest": "^23.3.12",
     "jest": "^23.6.0",
     "ts-jest": "^23.10.5",
+    "ts-node": "^7.0.1",
     "typescript": "^3.2.2"
   }
 }
