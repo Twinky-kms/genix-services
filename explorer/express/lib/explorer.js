@@ -95,7 +95,8 @@ module.exports = {
   },
 
   get_blockhash: function(height, cb) {
-    var uri = base_url + 'getblockhash?height=' + height;
+    /// Iquidus likes to ask for negative block heights, no idea why
+    var uri = base_url + 'getblockhash?height=' + Math.max(0, height);
     request({uri: uri, json: true}, function (error, response, body) {
       return cb(body);
     });

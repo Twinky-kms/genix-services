@@ -4,7 +4,7 @@
       "name": "explorer",
       "script": "./bin/cluster",
       "node_args": "--stack-size=10000",
-      "cron_restart": "30 21 * * *"
+      "cron_restart": "30 21 * * 1"
     },
     {
       "name": "sync index update",
