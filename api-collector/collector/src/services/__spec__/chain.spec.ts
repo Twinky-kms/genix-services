@@ -1,6 +1,11 @@
 import { ChainService } from "../chain";
 import { ChainData } from "../__types__/chain.types";
 
+/// These tests rely on having an active bitcoin-style daemon running
+/// that allows us to request data via rpc. The Docker image
+/// lukepighetti/pigeon-docker is available for testing.
+/// The instance will need a couple minutes to connect and retreive ten blocks
+
 const integrationConfig = {
   protocol: "http",
   user: "rpc_user",
@@ -32,7 +37,7 @@ describe("getChainData()", () => {
   });
 
   it("handles tenth block", async () => {
-    const c = await chain.getChainData(1);
+    const c = await chain.getChainData(10);
     expectChainDataIsValid(c);
   });
 });
