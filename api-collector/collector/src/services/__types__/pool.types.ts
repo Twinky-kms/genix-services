@@ -1,5 +1,11 @@
-export type PoolResponse = {
-  PGN: {
+export type PoolServiceArguments = {
+  url: string;
+  coinId: string;
+};
+
+export type PoolResponse = Record<
+  string,
+  {
     algo: string;
     port: number;
     name: string;
@@ -12,8 +18,8 @@ export type PoolResponse = {
     "24h_btc": number;
     lastblock: number;
     timesincelast: number;
-  };
-};
+  }
+>;
 
 export type PoolData = {
   miners: number;

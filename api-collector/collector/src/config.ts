@@ -15,7 +15,10 @@ export const config: ConfigArguments = {
   },
 
   /// the url for a yiimp pool
-  pool: "https://pool.pigeoncoin.org",
+  pool: {
+    url: "https://pool.pigeoncoin.org",
+    coinId: "PGN"
+  },
 
   /// the CoinGecko coin id
   market: "pigeoncoin",

@@ -2,11 +2,20 @@ import { PoolService } from "../pool";
 
 import { PoolData } from "../__types__/pool.types";
 
-const integrationUrl = "https://pool.pigeoncoin.org";
+/// An active Yiimp pool is required for testing.
+/// https://pool.pigeoncoin.org may be used.
+
+const integrationConfig = {
+  url: "https://pool.pigeoncoin.org",
+  coinId: "PGN"
+};
 
 describe("Chain", () => {
-  const pool = new PoolService(integrationUrl);
-  const poolSlash = new PoolService(`${integrationUrl}/`);
+  const pool = new PoolService(integrationConfig);
+  const poolSlash = new PoolService({
+    ...integrationConfig,
+    url: "https://pool.pigeoncoin.org/"
+  });
 
   var p: PoolData;
 
