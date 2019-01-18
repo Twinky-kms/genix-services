@@ -17,7 +17,7 @@ describe("getHistoricalData()", () => {
 
   it("gets a getHistoryData() response", async () => {
     const timestamps = [1546960487, 1547824487]; // 10 days
-    const epsilon = 0.1 * 24 * 60 * 60;
+    const epsilon = 0.05 * (10 * 24 * 60 * 60);
 
     const marketHistoryData = await market.getHistoricalData(timestamps);
 
