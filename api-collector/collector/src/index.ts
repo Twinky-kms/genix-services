@@ -44,6 +44,7 @@ async function main({
     db.updateLatestPool(await pool.getLatestData());
     db.updateLatestMarket(await market.getLatestData());
     db.updateLatestChain(await chain.getLatestData());
+    console.log(`updated latest! ${Date.now().toString()}`);
   }
 
   /**
