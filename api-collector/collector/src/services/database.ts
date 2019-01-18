@@ -25,13 +25,24 @@ export class DatabaseService {
     this._poolRef.update(poolData);
   }
 
-  public async updateHistoricalChain(results: ChainData[]) {
-    const updateObject: Record<string, { chain: ChainData }> = {};
+  public async updateHistoricalData(
+    chainHistoryData: ChainData[],
+    marketHistoryData: MarketData[]
+  ) {
+    const updateObject: Record<
+      string,
+      { chain: ChainData; market: MarketData }
+    > = {};
 
-    for (const chainData of results) {
-      const key = chainData.height;
-      updateObject[key] = { chain: chainData };
-    }
+    /// Make sure we don't upload undefined data due to one list being shorter than the other
+    const length = Math.min(chainHistoryData.length, marketHistoryData.length);
+
+    /// Slice and build updateObject
+    chainHistoryData.slice(0, length).forEach((chain, i) => {
+      const key = chain.height;
+      const market = marketHistoryData[i];
+      updateObject[key] = { chain, market };
+    });
 
     this._historicalRef.set(updateObject);
   }

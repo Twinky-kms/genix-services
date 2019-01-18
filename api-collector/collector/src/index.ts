@@ -38,6 +38,11 @@ async function main() {
    * Update the database with historical data
    */
   async function updateHistorical() {
-    db.updateHistoricalChain(await chain.getHistoricalData());
+    const chainHistoricalData = await chain.getHistoricalData();
+
+    const timestamps = chainHistoricalData.map(c => c.timestamp);
+    const marketHistoricalData = await market.getHistoricalData(timestamps);
+
+    db.updateHistoricalData(chainHistoricalData, marketHistoricalData);
   }
 }
