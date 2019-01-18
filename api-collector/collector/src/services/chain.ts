@@ -25,9 +25,12 @@ export class ChainService {
 
   /**
    * Get the latest historical chain data
+   *
+   * 200 points and 140 blocks per point is highly recommended
+   * it seems to provide a great balance of recent data and historical data
    */
 
-  public async getHistoricalData(points = 240): Promise<ChainData[]> {
+  public async getHistoricalData(points = 200): Promise<ChainData[]> {
     const lastHeight = await this._get<number>("getblockcount");
     const blocksPerPoint = 140;
 

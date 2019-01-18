@@ -23,7 +23,7 @@ async function main() {
   setInterval(updateLatest, 15 * 1000);
 
   updateHistorical();
-  setInterval(updateHistorical, 10 * 60 * 1000);
+  setInterval(updateHistorical, 30 * 60 * 1000);
 
   /**
    * Update the database with latest data
