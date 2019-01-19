@@ -23,8 +23,6 @@ services:
   explorer:
     build: ./explorer/express
     restart: always
-    # ports:
-    #   - "3005:3001"
     depends_on:
       - mongo
       - pigeoncoin
@@ -36,8 +34,6 @@ services:
   api-server:
     build: ./api-server
     restart: always
-    # ports:
-    #   - "3001:3001"
 
   api-collector:
     build: ./api-collector/collector
