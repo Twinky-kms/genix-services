@@ -19,7 +19,7 @@
   "symbol": "PGN",
 
   // logo
-  "logo": "/images/logo.png",
+  "logo": "/explorer/images/logo.png",
 
   // favicon
   "favicon": "public/favicon.ico",
