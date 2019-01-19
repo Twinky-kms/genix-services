@@ -4,30 +4,30 @@ html
     title= settings.title
     meta(name='google', content='notranslate')
     meta(name='viewport', content='width=device-width, initial-scale=.8')
-    link(rel='stylesheet', href='/themes/#{settings.theme}/bootstrap.min.css')
-    link(rel='stylesheet', href='/vendor/jqplot/jquery.jqplot.css')
+    link(rel='stylesheet', href='#{settings.subpath}/themes/#{settings.theme}/bootstrap.min.css')
+    link(rel='stylesheet', href='#{settings.subpath}/vendor/jqplot/jquery.jqplot.css')
     link(rel='stylesheet', href='//cdn.datatables.net/plug-ins/725b2a2115b/integration/bootstrap/3/dataTables.bootstrap.css')
     link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='#{settings.subpath}/stylesheets/style.css')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
     script(src='//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js')
-    script(src='/vendor/jqplot/jquery.jqplot.min.js')
-    script(src='/vendor/jqplot/plugins/jqplot.dateAxisRenderer.min.js')
-    script(src='/vendor/jqplot/plugins/jqplot.ohlcRenderer.min.js')
-    script(src='/vendor/jqplot/plugins/jqplot.highlighter.min.js')
-    script(src='/vendor/jqplot/plugins/jqplot.pieRenderer.min.js')
-    script(src='/vendor/jqplot/plugins/jqplot.barRenderer.min.js')
-    script(src='/vendor/jqplot/plugins/jqplot.categoryAxisRenderer.min.js')
+    script(src='#{settings.subpath}/vendor/jqplot/jquery.jqplot.min.js')
+    script(src='#{settings.subpath}/vendor/jqplot/plugins/jqplot.dateAxisRenderer.min.js')
+    script(src='#{settings.subpath}/vendor/jqplot/plugins/jqplot.ohlcRenderer.min.js')
+    script(src='#{settings.subpath}/vendor/jqplot/plugins/jqplot.highlighter.min.js')
+    script(src='#{settings.subpath}/vendor/jqplot/plugins/jqplot.pieRenderer.min.js')
+    script(src='#{settings.subpath}/vendor/jqplot/plugins/jqplot.barRenderer.min.js')
+    script(src='#{settings.subpath}/vendor/jqplot/plugins/jqplot.categoryAxisRenderer.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js')
     script(src='//cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js')
     script(src='//cdn.datatables.net/responsive/1.0.1/js/dataTables.responsive.js')
     script(src='//cdn.datatables.net/plug-ins/725b2a2115b/integration/bootstrap/3/dataTables.bootstrap.js')
-    script(src='/javascripts/chart.js')
+    script(src='#{settings.subpath}/javascripts/chart.js')
     script.
       $(document).ready(function(){
         $('##{active}').addClass('active');
         function update_stats(){
-          $.ajax({url: '/ext/summary', success: function(json){
+          $.ajax({url: '#{settings.subpath}/ext/summary', success: function(json){
             $("#supply").text(parseFloat(json.data[0].supply.toPrecision(3)).toLocaleString()); // edit to 3 sigfig
             $("#difficulty").text(parseFloat(json.data[0].difficulty.toPrecision(3))); // edit to 3 sigfig
             $("#difficultyHybrid").text(json.data[0].difficultyHybrid);
@@ -90,41 +90,41 @@ html
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='/') #{settings.title}
+          a.navbar-brand(href='#{settings.subpath}/') #{settings.title}
         .collapse.navbar-collapse(id='navbar-collapse')
           ul.nav.navbar-nav
             li#home
-              a.navbar-link(href='/')
+              a.navbar-link(href='#{settings.subpath}/')
                 span.glyphicon.glyphicon-search
                 span.menu-text #{settings.locale.menu_explorer}
             if settings.heavy == true
               li#reward
-                a.navbar-link(href='/reward')
+                a.navbar-link(href='#{settings.subpath}/reward')
                   span.fa.fa-star
                   span.menu-text #{settings.locale.menu_reward}
             if settings.display.movement == true
               li#movement
-                a.navbar-link.loading(href='/movement')
+                a.navbar-link.loading(href='#{settings.subpath}/movement')
                   span.fa.fa-money
                   span.menu-text #{settings.locale.menu_movement}
             if settings.display.network == true
               li#network
-                a.navbar-link(href='/network')
+                a.navbar-link(href='#{settings.subpath}/network')
                   span.fa.fa-share-alt
                   span.menu-text #{settings.locale.menu_network}
             if settings.display.richlist == true
               li#richlist
-                a.navbar-link(href='/richlist')
+                a.navbar-link(href='#{settings.subpath}/richlist')
                   span.fa.fa-btc
                   span.menu-text #{settings.locale.menu_richlist}
             if settings.display.markets == true
               li#markets
-                a.navbar-link.loading(href='/markets/#{settings.markets.default}')
+                a.navbar-link.loading(href='#{settings.subpath}/markets/#{settings.markets.default}')
                   span.fa.fa-line-chart
                   span.menu-text #{settings.locale.menu_markets}
             if settings.display.api == true
               li#info
-                a.navbar-link(href='/info')
+                a.navbar-link(href='#{settings.subpath}/info')
                   span.glyphicon.glyphicon-info-sign
                   span.menu-text #{settings.locale.menu_api}
             if settings.display.notice.show == true
@@ -193,7 +193,7 @@ html
                label#lastPrice -
 
       .row.text-center.hidden-xs(style='margin-top:10px;margin-bottom:20px;')
-        form.form-inline(method='post', action='/search')
+        form.form-inline(method='post', action='#{settings.subpath}/search')
           #index-search.form-group
             input.form-control(type='text', name='search', placeholder='#{settings.locale.ex_search_message}', style='min-width:80%;margin-right:5px;')
             button.btn.btn-default(type='submit') #{settings.locale.ex_search_button}

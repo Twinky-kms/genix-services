@@ -1,5 +1,7 @@
 FROM keymetrics/pm2:10-alpine
 
+EXPOSE 3001
+
 # Bundle APP files
 COPY . .
 

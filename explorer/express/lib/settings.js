@@ -10,6 +10,9 @@ var jsonminify = require("jsonminify");
 //The app title, visible e.g. in the browser window
 exports.title = "blockchain";
 
+// subpath
+exports.subpath = "";
+
 //The url it will be accessed from
 exports.address = "explorer.example.com";
 
@@ -179,6 +182,10 @@ exports.reloadSettings = function reloadSettings() {
   }
 
 };
+
+if(exports.subpath && !exports.subpath.startsWith("/")){
+  console.warn("your subpath must start with a slash")
+}
 
 // initially load settings
 exports.reloadSettings();

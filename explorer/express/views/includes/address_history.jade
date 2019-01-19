@@ -9,7 +9,7 @@ tbody
     tr
       td.hidden-sm.hidden-md #{time} 
       td.hidden-xs
-        a(href='/tx/#{tx.txid}') #{tx.txid}
+        a(href='#{settings.subpath}/tx/#{tx.txid}') #{tx.txid}
       - var done = false
       - var out = 0
       - var vin = 0

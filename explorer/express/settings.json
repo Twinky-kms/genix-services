@@ -7,7 +7,10 @@
   // name your instance!
   "title": "Pigeoncoin",
 
-  "address": "127.0.0.1:3001",
+  // must have leading slash
+  "subpath": "/explorer",
+
+  "address": "127.0.0.1",
 
   // coin name
   "coin": "Pigeoncoin",
@@ -16,7 +19,7 @@
   "symbol": "PGN",
 
   // logo
-  "logo": "/images/logo.png",
+  "logo": "/explorer/images/logo.png",
 
   // favicon
   "favicon": "public/favicon.ico",

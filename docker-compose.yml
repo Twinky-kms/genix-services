@@ -1,0 +1,50 @@
+version: "3"
+services:
+  proxy:
+    build: ./proxy
+    restart: always
+    ports:
+      - "3000:3000"
+
+  pigeoncoin:
+    build: ./explorer/pigeoncoin
+    restart: always
+    volumes:
+      - "chain_data:/root/.pigeon"
+
+  mongo:
+    build: ./explorer/db
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: explorer_database
+    volumes:
+      - "database_data:/data/db"
+
+  explorer:
+    build: ./explorer/express
+    restart: always
+    depends_on:
+      - mongo
+      - pigeoncoin
+
+  bot:
+    build: ./bot
+    restart: always
+
+  api-server:
+    build: ./api-server
+    restart: always
+
+  api-collector:
+    build: ./api-collector/collector
+    restart: always
+    depends_on:
+      - pigeoncoin
+    environment:
+      RPC_HOST: pigeoncoin
+      FETCH_HISTORICAL_MINUTES: 5
+      RTDB_URL: https://scratch-project-9f138.firebaseio.com
+
+volumes:
+  chain_data:
+  database_data:
