@@ -3,7 +3,8 @@
     {
       "name": "api-server",
       "script": "./src/app.js",
-      "cron_restart": "30 21 * * *"
+      "cron_restart": "30 21 * * *",
+      "restart_delay": 10000
     }
   ]
 }
