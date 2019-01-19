@@ -123,6 +123,7 @@ app.use('/ext/connections', function(req,res){
 });
 
 // locals
+app.set('subpath', settings.subpath);
 app.set('title', settings.title);
 app.set('symbol', settings.symbol);
 app.set('coin', settings.coin);

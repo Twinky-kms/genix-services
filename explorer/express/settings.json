@@ -7,6 +7,9 @@
   // name your instance!
   "title": "Pigeoncoin",
 
+  // must have leading slash
+  "subpath": "/explorer",
+
   "address": "127.0.0.1",
 
   // coin name
