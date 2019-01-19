@@ -235,15 +235,15 @@ router.post('/search', function(req, res) {
   var query = req.body.search;
   if (query.length == 64) {
     if (query == settings.genesis_tx) {
-      res.redirect('/block/' + settings.genesis_block);
+      res.redirect(settings.subpath + '/block/' + settings.genesis_block);
     } else {
       db.get_tx(query, function(tx) {
         if (tx) {
-          res.redirect('/tx/' +tx.txid);
+          res.redirect(settings.subpath + '/tx/' +tx.txid);
         } else {
           lib.get_block(query, function(block) {
             if (block != 'There was an error. Check your console.') {
-              res.redirect('/block/' + query);
+              res.redirect(settings.subpath + '/block/' + query);
             } else {
               route_get_index(res, locale.ex_search_error + query );
             }
@@ -254,11 +254,11 @@ router.post('/search', function(req, res) {
   } else {
     db.get_address(query, function(address) {
       if (address) {
-        res.redirect('/address/' + address.a_id);
+        res.redirect(settings.subpath + '/address/' + address.a_id);
       } else {
         lib.get_blockhash(query, function(hash) {
           if (hash != 'There was an error. Check your console.') {
-            res.redirect('/block/' + hash);
+            res.redirect(settings.subpath + '/block/' + hash);
           } else {
             route_get_index(res, locale.ex_search_error + query );
           }

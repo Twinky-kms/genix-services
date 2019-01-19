@@ -193,7 +193,7 @@ html
                label#lastPrice -
 
       .row.text-center.hidden-xs(style='margin-top:10px;margin-bottom:20px;')
-        form.form-inline(method='post', action='/search')
+        form.form-inline(method='post', action='#{settings.subpath}/search')
           #index-search.form-group
             input.form-control(type='text', name='search', placeholder='#{settings.locale.ex_search_message}', style='min-width:80%;margin-right:5px;')
             button.btn.btn-default(type='submit') #{settings.locale.ex_search_button}
