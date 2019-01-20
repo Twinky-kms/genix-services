@@ -32,3 +32,10 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /pigeoncoin \
   && apt-get remove -y git libboost-all-dev
+
+
+EXPOSE 8757
+
+VOLUME /root/.pigeon
+
+CMD ["pigeond", "-txindex", "-rpcuser=rpc_user", "-rpcpassword=rpc_password", "-rpcport=8757", "-rpcallowip=0.0.0.0/0"]
