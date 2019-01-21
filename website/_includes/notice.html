@@ -1,0 +1,9 @@
+{% if site.notice.show == true %}
+  <section class="section has-text-centered" style="padding:0.8em">
+    <!-- <h2 class="subtitle has-text-danger">{{ site.notice.text }}</h2> -->
+    <a href="{{ site.notice.address }}" class="is-size-5 {{ site.notice.color }}">
+      <i class="fas fa-exclamation-triangle"></i>&nbsp;
+      {{ site.notice.text }}
+    </a>
+  </section>
+{% endif %}

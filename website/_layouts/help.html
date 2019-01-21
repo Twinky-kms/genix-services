@@ -1,0 +1,41 @@
+---
+layout: default
+---
+
+
+<section class="section">
+  <div class="columns">
+    <div class="column is-narrow is-hidden-touch">
+      <aside class="menu is-unselectable">
+        {% for category in page.categories %}
+          <p class="menu-label">
+            {{ category.title }}
+          </p>
+          <ul class="menu-list">
+            {% for topic in category.topics %}
+            <li><a href="./#{{ topic.title | replace: ' ', '-' }}">{{ topic.title }}</a></li>
+            {% endfor %}
+          </ul>
+        {% endfor %}
+      </aside>
+    </div>
+
+    <div class="column">
+      {% for category in page.categories %}
+        <div class="notification is-light">
+          <section class="section">
+            <h1 class="title">{{ category.title }}</h1>
+            <h2 class="subtitle" style="padding-bottom:2em">{{ category.subtitle }}</h2>
+            {% for topic in category.topics %}
+              <h2 id="{{ topic.title | replace: ' ', '-' }}" class="title is-5">{{ topic.title }}</h2>
+              <div class="content">
+                {{ topic.content | markdownify }}
+              </div>
+            {% endfor %}
+          </section>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>

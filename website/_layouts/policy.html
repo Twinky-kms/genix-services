@@ -1,0 +1,18 @@
+---
+layout: default
+---
+
+<div class="container" >
+  {% for section in page.sections %}
+    <h1 class="title" style="padding-top:2em">{{ section.title }}</h1>
+    <h2 class="subtitle">{{ section.subtitle }}</h2>
+    <ul>
+      {% for item in section.items %}
+      <li>{{ item.question }}</li>
+      <li><em>{{ item.answer }}</em></li>
+      <li> &nbsp;</li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+  <div style="height:10em"></div>
+</div>
