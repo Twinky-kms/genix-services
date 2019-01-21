@@ -85,6 +85,6 @@ minima:
 # Build settings
 # theme: minima
 
-plugins:
+plugins_dir:
  - jekyll-feed
  - jekyll-seo-tag

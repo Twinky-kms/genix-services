@@ -5,7 +5,7 @@ layout: compressed
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
 
-  {%- include head.html -%}
+  {% include head.html %}
 
   <body>
     {% include notice.html %}
@@ -14,7 +14,7 @@ layout: compressed
     <section id="index-top-hero" class="hero is-primary is-medium">
       <div class="hero-head">
 
-        {%- include navbar.html -%}
+        {% include navbar.html %}
 
       </div>
 
@@ -31,18 +31,18 @@ layout: compressed
     </section>
 
 
-    {%- include index/stats.html -%}
+    {% include index/stats.html %}
 
-    {%- include index/video.html -%}
+    {% include index/video.html %}
 
-    {%- include index/about.html -%}
+    {% include index/about.html %}
 
-    {%- include index/resources.html -%}
+    {% include index/resources.html %}
 
     <section id="index-base-hero">
     </section>
 
-    {%- include footer.html -%}
+    {% include footer.html %}
 
   </body>
 
