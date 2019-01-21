@@ -39,9 +39,9 @@ exchanges:
   'Safe Trade': https://www.safe.trade/
 
 broadcasts:
-  'October 23': /assets/broadcasts/october-23-2018.ogg
-  'November 6': /assets/broadcasts/november-6-2018.ogg
-  'November 20': /assets/broadcasts/november-20-2018.ogg
+  'November 6': https://www.youtube.com/watch?v=mSJdWc_JJwQ
+  'November 20': https://www.youtube.com/watch?v=Begs14sGrhI
+  'January 15': https://www.youtube.com/watch?v=dNvzaoLd2gs
 
 
 pool:
