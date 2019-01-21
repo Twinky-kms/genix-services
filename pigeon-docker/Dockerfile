@@ -38,4 +38,4 @@ EXPOSE 8757
 
 VOLUME /root/.pigeon
 
-CMD ["pigeond", "-txindex", "-rpcuser=rpc_user", "-rpcpassword=rpc_password", "-rpcport=8757", "-rpcallowip=0.0.0.0/0"]
+CMD ["pigeond", "-printtoconsole", "-txindex", "-rpcuser=rpc_user", "-rpcpassword=rpc_password", "-rpcport=8757", "-rpcallowip=0.0.0.0/0"]
