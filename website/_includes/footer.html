@@ -1,0 +1,10 @@
+
+  <!-- FOOTER -->
+  <footer class="footer has-text-centered">
+      <p>
+        {% for link in site.social %}
+          <a href="{{link[1]}}"><i class="fab fa-{{link[0] | downcase}} fa-2x"></i></a>
+        {% endfor %}
+      </p>
+      <p style="padding-top:2em"><a href="{{ "/policy" | relative_url }}">Privacy Policy</a></p>
+  </footer>

@@ -1,0 +1,104 @@
+---
+---
+
+// Import the initial variables
+@import "bulma/sass/utilities/initial-variables";
+@import "bulma/sass/utilities/functions";
+
+
+$primary: #618fe8;
+$secondary: #85edff;
+
+$link: $blue;
+$info: $cyan;
+$success: $green;
+$warning: $yellow;
+$danger: $red;
+
+
+
+@import "bulma/sass/utilities/derived-variables";
+
+$secondary-invert: findColorInvert($secondary);
+$light: #f8f8f8;
+$colors: mergeColorMaps(("white": ($white, $black), "black": ($black, $white), "light": ($light, $light-invert), "dark": ($dark, $dark-invert), "primary": ($primary, $primary-invert), "secondary": ($secondary, $secondary-invert), "link": ($link, $link-invert), "info": ($info, $info-invert), "success": ($success, $success-invert), "warning": ($warning, $warning-invert), "danger": ($danger, $danger-invert)), $custom-colors);
+
+
+//$family-sans-serif: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+$family-monospace: Menlo, monospace;
+
+//$gap: 32px;
+$tablet:	568px;
+$desktop:	896px + (2 * $gap);
+//$widescreen:	1152px + (2 * $gap);
+//$fullhd:	1344px + (2 * $gap);
+
+@font-face {
+    font-family: Bahnschrift;
+    src: url("./bahnschrift.ttf");
+}
+
+
+
+.footer i{
+  margin-left:5px;
+  margin-right:5px;
+}
+
+.hero-body .logo{
+  //margin-top: 80px;
+  margin-bottom:80px;
+  max-width:220px;
+}
+
+
+.navbar-item img {
+    max-height: 2.2rem !important;
+}
+
+#index-top-hero{
+  background-image: url("../assets/img/index-top-hero.svg");
+  background-repeat: repeat-x;
+  background-position: center;
+  background-size:cover;
+}
+
+#index-top-hero .subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-family: Bahnschrift;
+    font-size: 1.7em;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+#index-base-hero {
+    height: 600px;
+    background-image: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 15%,rgba(255,255,255,0) 100%), url(../assets/img/index-base-hero.svg);
+    background-repeat: repeat-x;
+    background-position: bottom;
+    background-size: cover;
+}
+
+.pigeon-gradient{
+  //background-color: #618de617 !important;
+//  background-image: linear-gradient(141deg, #618FE8 0%, #85ECFF 100%);
+  //color: #fff;
+}
+
+#roadmap-menu a{
+  cursor: default;
+}
+
+.columns-are-same-height{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.columns-are-same-height .card-footer{
+  margin-top: auto;
+}
+
+
+// Import the rest
+@import "bulma/bulma.sass";

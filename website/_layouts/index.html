@@ -1,0 +1,49 @@
+---
+layout: compressed
+---
+
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {% include head.html %}
+
+  <body>
+    {% include notice.html %}
+
+    <!-- HERO -->
+    <section id="index-top-hero" class="hero is-primary is-medium">
+      <div class="hero-head">
+
+        {% include navbar.html %}
+
+      </div>
+
+      <!-- HERO body -->
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <img class="logo" src="{{'/assets/img/icon.svg' | relative_url }}" alt="">
+          <h1 class="subtitle">
+            {{ site.tagline }}
+          </h2>
+        </div>
+      </div>
+
+    </section>
+
+
+    {% include index/stats.html %}
+
+    {% include index/video.html %}
+
+    {% include index/about.html %}
+
+    {% include index/resources.html %}
+
+    <section id="index-base-hero">
+    </section>
+
+    {% include footer.html %}
+
+  </body>
+
+</html>

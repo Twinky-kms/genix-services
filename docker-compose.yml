@@ -26,6 +26,7 @@ services:
     depends_on:
       - mongo
       - pigeoncoin
+      - proxy
 
   bot:
     build: ./bot
@@ -44,6 +45,10 @@ services:
       RPC_HOST: pigeoncoin
       FETCH_HISTORICAL_MINUTES: 5
       RTDB_URL: https://scratch-project-9f138.firebaseio.com
+
+  website:
+    build: ./website
+    restart: always
 
 volumes:
   chain_data:

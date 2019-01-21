@@ -1,0 +1,98 @@
+<section class="hero">
+
+  <div id="resources" class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title">Resources</h1>
+      <h2 class="subtitle">Find what you need to succeed</h2>
+    </div>
+  </div>
+
+  <div class="hero-body">
+    <div class="tile is-ancestor">
+      <div class="tile is-vertical">
+        <div class="tile">
+          <div class="tile is-parent">
+            <article class="tile is-child notification is-light">
+              <p class="title">Mining pool</p>
+              <p class="subtitle is-6">Funding digital freedom</p>
+
+              <div class="buttons">
+                <a href="{{site.pool.website}}" class="button is-info is-medium">Official Pool &nbsp;<i class="fas fa-link"></i></a>
+                <a href="{{site.explorer.website}}" class="button is-info is-medium">Block Explorer &nbsp;<i class="fas fa-link"></i></a>
+              </div>
+
+
+              <!-- live progress bars -->
+              <progress data-id="pool-miners" class="progress is-success is-marginless" value="5" max="100"></progress>
+              <span class="level is-mobile">
+                <span class="level-left"><em>miners</em></span>
+                <span data-id="pool-miners-tag" class="level-right">79</span>
+              </span>
+
+              <progress data-id="pool-payout" class="progress is-success is-marginless" value="151" max="180"></progress>
+              <span class="level is-mobile">
+                <span class="level-left"><em>payout</em></span>
+                <span data-id="pool-payout-tag" class="level-right">in 29m</span>
+              </span>
+
+              <progress data-id="pool-lastBlock" class="progress is-success is-marginless" value="29" max="96"></progress>
+              <span class="level is-mobile">
+                <span class="level-left"><em>block</em></span>
+                <span data-id="pool-lastBlock-tag" class="level-right">29m ago</span>
+              </span>
+
+            </article>
+          </div>
+          <div class="tile is-parent is-vertical">
+            <article class="tile is-child notification is-light">
+              <p class="title">Wallets</p>
+              <p class="subtitle is-6">For any platform</p>
+              <div class="buttons">
+                <a href="{{ site.wallets.macOS }}" class="button is-medium is-success">macOS &nbsp;<i class="fab fa-apple"></i></a>
+                <a href="{{ site.wallets.Windows }}" class="button is-medium is-success">Windows &nbsp;<i class="fab fa-windows"></i></a>
+                <a href="{{ site.wallets.Linux }}" class="button is-medium is-success">Linux &nbsp;<i class="fas fa-download"></i></a>
+              </div>
+            </article>
+            <article class="tile is-child notification is-light">
+              <p class="title">Miners</p>
+              <p class="subtitle is-6">For every architecture</p>
+              <div class="buttons">
+                {% for platform in site.miners %}
+                  <a href="{{ platform[1] }}" class="button is-medium is-warning">{{ platform[0]}} &nbsp;<i class="fas fa-download"></i></a>
+                {% endfor %}
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+      <div class="tile is-ancestor">
+        <div class="tile is-parent">
+          <article class="tile is-child notification is-light">
+            <p class="title">Broadcasts</p>
+            <p class="subtitle is-6">Recorded fireside chats</p>
+
+            <div class="buttons">
+              {% for recording in site.broadcasts %}
+                <a href="{{ recording[1] }}" class="button is-medium is-secondary">{{ recording[0]}} &nbsp;<i class="fas fa-play"></i></a>
+              {% endfor %}
+            </div>
+          </article>
+        </div>
+        <div class="tile is-parent">
+
+          <article class="tile is-child notification is-light">
+            <p class="title">Exchanges</p>
+            <p class="subtitle is-6">Reliable trading pairs</p>
+            <div class="buttons">
+              {% for platform in site.exchanges %}
+                <a href="{{ platform[1] }}" class="button is-medium is-danger">{{ platform[0]}} &nbsp;<i class="fas fa-link"></i></a>
+              {% endfor %}
+            </div>
+          </article>
+        </div>
+      </div>
+  </div>
+</section>
