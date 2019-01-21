@@ -9,4 +9,8 @@ RUN cp /tmp/seeder/dnsseed /usr/local/bin
 EXPOSE 53/udp
 
 WORKDIR /var/dnsseed
-ENTRYPOINT ["/usr/local/bin/dnsseed"]
+
+ENTRYPOINT ["/usr/local/bin/dnsseed", \
+  "-h", "seed2.pigeoncoin.org", \
+  "-n", "0.0.0.0", \
+  "-m", "contact@pigeoncoin.org"]

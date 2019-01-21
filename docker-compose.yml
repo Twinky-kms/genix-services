@@ -50,6 +50,12 @@ services:
     build: ./website
     restart: always
 
+  seeder:
+    build: ./seeder
+    restart: always
+    ports: 
+     - "5353:53"
+
 volumes:
   chain_data:
   database_data:
