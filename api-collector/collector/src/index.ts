@@ -62,5 +62,6 @@ async function main({
     const marketHistoricalData = await market.getHistoricalData(timestamps);
 
     db.updateHistoricalData(chainHistoricalData, marketHistoricalData);
+    console.log(`updated historical! ${Date.now().toString()}`);
   }
 }
