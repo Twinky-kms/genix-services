@@ -33,9 +33,19 @@ RUN apt-get update \
   && rm -rf /pigeoncoin \
   && apt-get remove -y git libboost-all-dev
 
-
+# mainnet port
 EXPOSE 8757
 
+# rpc port
+EXPOSE 8756
+
+# chain data location
 VOLUME /root/.pigeon
 
-CMD ["pigeond", "-printtoconsole", "-txindex", "-rpcuser=rpc_user", "-rpcpassword=rpc_password", "-rpcport=8757", "-rpcallowip=0.0.0.0/0"]
+# set defaults
+ENV RPC_USER=rpc_user
+ENV RPC_PASSWORD=rpc_password
+ENV RPC_ALLOW_IP=127.0.0.1
+ENV RPC_PORT=8756
+
+ENTRYPOINT pigeond -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD -rpcallowip=$RPC_ALLOW_IP -rpcport=$RPC_PORT -txindex -printtoconsole

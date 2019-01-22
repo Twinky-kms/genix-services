@@ -15,13 +15,13 @@ export const config: ConfigArguments = {
     blocksPerPoint: parseInt(process.env["BLOCKS_PER_POINT"] || "140")
   },
 
-  /// eg: http://rpc_user:rpc_password@localhost:8757
+  /// eg: http://rpc_user:rpc_password@localhost:8756
   chain: {
     protocol: process.env["RPC_PROTOCOL"] || "http",
     user: process.env["RPC_USER"] || "rpc_user",
     pass: process.env["RPC_PASSWORD"] || "rpc_password",
     host: process.env["RPC_HOST"] || "localhost",
-    port: parseInt(process.env["RPC_PORT"] || "8757")
+    port: parseInt(process.env["RPC_PORT"] || "8756")
   },
 
   /// the url and coinId for a Yiimp pool

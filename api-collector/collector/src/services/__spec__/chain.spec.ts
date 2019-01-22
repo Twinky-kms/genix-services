@@ -11,7 +11,7 @@ const integrationConfig = {
   user: "rpc_user",
   pass: "rpc_password",
   host: "localhost",
-  port: 8757
+  port: 8756
 };
 
 describe("getLatestData()", () => {

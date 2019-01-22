@@ -5,12 +5,18 @@ services:
     restart: always
     ports:
       - "3000:3000"
+    depends_on:
+      - explorer
+      - api-server
+      - website
 
   pigeoncoin:
-    build: ./explorer/pigeoncoin
+    build: ./pigeon-docker
     restart: always
     volumes:
       - "chain_data:/root/.pigeon"
+    environment:
+      RPC_ALLOW_IP: "0.0.0.0/0"
 
   mongo:
     build: ./explorer/db
@@ -26,7 +32,8 @@ services:
     depends_on:
       - mongo
       - pigeoncoin
-      - proxy
+    environment:
+      SUB_PATH: /explorer
 
   bot:
     build: ./bot
@@ -53,8 +60,8 @@ services:
   seeder:
     build: ./seeder
     restart: always
-    ports: 
-     - "5353:53"
+    ports:
+      - "5353:53"
 
 volumes:
   chain_data:
