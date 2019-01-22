@@ -79,7 +79,7 @@ export class ChainService {
       height: block.height,
       lastHash: block.hash,
       supply: block.height * 5000,
-      timestamp: Math.floor(Date.now() / 1000)
+      timestamp: block.mediantime
     };
 
     return chainData;

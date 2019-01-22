@@ -1,18 +1,21 @@
 FROM nginx
 
 # setup build tools
-WORKDIR /app
-COPY . /app
 
 RUN apt-get update\
   && apt-get install -y jekyll \
   && rm -rf /var/lib/apt/lists/*
 
-# build website
-WORKDIR /data
+# copy data
+WORKDIR /app
+COPY . /app
 COPY ./default.conf /etc/nginx/conf.d/default.conf
 
+# build website
+WORKDIR /data
 RUN jekyll build -s /app -d .
 
-# finish up
+# production port
 EXPOSE 3000
+# dev port
+EXPOSE 4000
