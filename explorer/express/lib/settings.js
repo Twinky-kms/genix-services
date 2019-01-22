@@ -181,11 +181,17 @@ exports.reloadSettings = function reloadSettings() {
     }
   }
 
+  /// make sure our subpath is correct
+  if(exports.subpath && !exports.subpath.startsWith("/")){
+    console.warn("your subpath must start with a slash")
+  }
+
+  /// Inject environment variables here
+  exports.subpath = process.env.SUB_PATH || exports.subpath
+  exports.back_url = process.env.BACK_URL || exports.subpath || "/"
+
 };
 
-if(exports.subpath && !exports.subpath.startsWith("/")){
-  console.warn("your subpath must start with a slash")
-}
 
 // initially load settings
 exports.reloadSettings();

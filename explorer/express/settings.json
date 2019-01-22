@@ -7,8 +7,8 @@
   // name your instance!
   "title": "Pigeoncoin",
 
-  // must have leading slash
-  "subpath": "/explorer",
+  // root is "", /explorer is "/explorer"
+  "subpath": "",
 
   "address": "127.0.0.1",
 
@@ -18,8 +18,8 @@
   // coin symbol
   "symbol": "PGN",
 
-  // logo
-  "logo": "/explorer/images/logo.png",
+  // logo, do not include subpath
+  "logo": "/images/logo.png",
 
   // favicon
   "favicon": "public/favicon.ico",
@@ -50,7 +50,7 @@
   // wallet settings
   "wallet": {
     "host": "pigeoncoin",
-    "port": 8757,
+    "port": 8756,
     "user": "rpc_user",
     "pass": "rpc_password"
   },

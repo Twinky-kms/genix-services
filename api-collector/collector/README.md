@@ -20,7 +20,7 @@ RPC_PROTOCOL=http
 RPC_USER=rpc_user
 RPC_PASSWORD=rpc_password
 RPC_HOST=localhost
-RPC_PORT=8757
+RPC_PORT=8756
 
 YIIMP_URL=https://pool.pigeoncoin.org
 YIIMP_COIN_ID=PGN

@@ -1,10 +1,12 @@
 version: "3"
 services:
   pigeoncoin:
-    build: ./pigeoncoin
+    build: ../pigeon-docker
     restart: always
     volumes:
       - "chain_data:/root/.pigeon"
+    environment:
+      RPC_ALLOW_IP: "0.0.0.0/0"
 
   mongo:
     build: ./db
