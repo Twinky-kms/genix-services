@@ -14,7 +14,7 @@ export class DatabaseService {
   private _marketRef = this._db.ref(`/latestData/market`);
   private _poolRef = this._db.ref(`/latestData/pool`);
 
-  private _historicalRef = this._db.ref(`/historicalData`);
+  private _historicalRef = this._db.ref(`/historyData`);
 
   public async updateLatestChain(chainData: ChainData) {
     this._chainRef.update(chainData);
