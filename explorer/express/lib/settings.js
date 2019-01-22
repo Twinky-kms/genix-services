@@ -188,6 +188,7 @@ exports.reloadSettings = function reloadSettings() {
 
   /// Inject environment variables here
   exports.subpath = process.env.SUB_PATH || exports.subpath
+  exports.back_url = process.env.BACK_URL || exports.subpath || "/"
 
 };
 

@@ -34,6 +34,7 @@ services:
       - pigeoncoin
     environment:
       SUB_PATH: /explorer
+      BACK_URL: /
 
   bot:
     build: ./bot
