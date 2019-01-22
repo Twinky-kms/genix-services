@@ -11,7 +11,7 @@ services:
       - website
 
   pigeoncoin:
-    build: ./pigeon-docker
+    image: lukepighetti/pigeoncoin
     restart: always
     volumes:
       - "chain_data:/root/.pigeon"
