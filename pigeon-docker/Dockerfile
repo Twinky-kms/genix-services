@@ -1,5 +1,7 @@
 FROM ubuntu:trusty
 
+ARG TAG=v16.00.1b
+
 WORKDIR /
 
 # install build tools
@@ -20,7 +22,7 @@ RUN add-apt-repository ppa:bitcoin/bitcoin -y \
 # clone and build
 RUN apt-get update \
   && apt-get install -y --no-install-recommends git libboost-all-dev \
-  && git clone https://github.com/Pigeoncoin/pigeoncoin.git \
+  && git clone -b ${TAG} https://github.com/Pigeoncoin/pigeoncoin.git \
   && cd ./pigeoncoin \ 
   && export CC="gcc -fPIC"  \
   && export CXX="g++ -fPIC"  \
