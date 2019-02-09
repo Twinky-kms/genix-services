@@ -1,4 +1,4 @@
-Helper
+Community Node
 ======
 
 This is a `docker-compose` service that sets up an Explorer, Wallet, and DNS Seeder. This allows community members to setup critical infrastructure in a very simple and robust fashion.
@@ -28,25 +28,29 @@ sudo sh get-docker.sh
 [Install docker-compose](https://docs.docker.com/compose/install/)
 ```
 sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 Secure your server with `ufw`
 ```
-ufw allow 22 53 80 443
+ufw allow 22 
+ufw allow 53
+ufw allow 80
+ufw allow 443
 ufw enable
 ```
 
 
-3\. Download helper
+3\. Download
 -------------------
 
 Clone this repository
 ```
 git clone https://github.com/Pigeoncoin/services.git
-cd services/helper
+cd services/community-node
 ```
 
-4\. Configure helper
+4\. Configure
 --------------------
 Then edit `docker-compose.yml` to reflect your DNS settings.
 ```
@@ -57,7 +61,7 @@ Then edit `docker-compose.yml` to reflect your DNS settings.
       EMAIL: contact@mydomain.org
 ```
 
-5\. Launch helper
+5\. Launch
 -----------------
 
 ```
