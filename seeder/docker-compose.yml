@@ -1,0 +1,16 @@
+version: "3"
+services:
+  seeder:
+    build: ./
+    restart: always
+    ports:
+      - "53:53/udp"
+    volumes:
+      - "seeder_data:/var/dnsseed"
+    environment:
+      NS_ADDRESS: seed.pigeoncoin.org
+      A_ADDRESS: dnsseed.pigeoncoin.org
+      EMAIL: contact@pigeoncoin.org
+
+volumes:
+  seeder_data:
