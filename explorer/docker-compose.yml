@@ -20,7 +20,8 @@ services:
     build: ./express
     restart: always
     ports:
-      - "3000:3001"
+      - "80:3001"
+      - "443:3001"
     depends_on:
       - mongo
       - pigeoncoin

@@ -4,13 +4,11 @@ services:
     build: ./proxy
     restart: always
     ports:
-      # - "80:80"
-      # - "443:443"
-      - "3000:3000"
+      - "80:80"
+      - "443:443"
     depends_on:
       - explorer
       - api-server
-      - website
 
   pigeoncoin:
     image: lukepighetti/pigeoncoin:latest
@@ -21,7 +19,7 @@ services:
       RPC_ALLOW_IP: "0.0.0.0/0"
 
   mongo:
-    build: ./explorer/db
+    build: ../explorer/db
     restart: always
     environment:
       MONGO_INITDB_DATABASE: explorer_database
@@ -29,25 +27,24 @@ services:
       - "database_data:/data/db"
 
   explorer:
-    build: ./explorer/express
+    build: ../explorer/express
     restart: always
     depends_on:
       - mongo
       - pigeoncoin
     environment:
-      SUB_PATH: /explorer
       BACK_URL: /
 
   bot:
-    build: ./bot
+    build: ../bot
     restart: always
 
   api-server:
-    build: ./api-server
+    build: ../api-server
     restart: always
 
   api-collector:
-    build: ./api-collector/collector
+    build: ../api-collector/collector
     restart: always
     depends_on:
       - pigeoncoin
@@ -56,12 +53,8 @@ services:
       FETCH_HISTORICAL_MINUTES: 5
       RTDB_URL: https://scratch-project-9f138.firebaseio.com
 
-  website:
-    build: ./website
-    restart: always
-
   seeder:
-    build: ./seeder
+    build: ../seeder
     restart: always
     ports:
       - "53:53/udp"
@@ -69,7 +62,7 @@ services:
       - "seeder_data:/var/dnsseed"
     environment:
       NS_ADDRESS: seed.pigeoncoin.org
-      A_ADDRESS: dnsseed.pigeoncoin.org
+      A_ADDRESS: explorer.pigeoncoin.org
       EMAIL: contact@pigeoncoin.org
 
 volumes:
