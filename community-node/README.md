@@ -77,10 +77,10 @@ Use [DNS Checker](https://dnschecker.com) to... check your DNS!
 https://dnschecker.org/#A/vps.mydomain.org should show your server IP.
 
 ```
-Holtsville NY        167.99.98.192	
-Canoga Park, CA      167.99.98.192	
-Holtsville, NY       167.99.98.192	
-Mountain View, CA    167.99.98.192
+Holtsville NY        167.99.98.134	
+Canoga Park, CA      167.99.98.134	
+Holtsville, NY       167.99.98.134	
+Mountain View, CA    167.99.98.134
 ```
 
 2\. NS Record & working seed

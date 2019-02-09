@@ -9,7 +9,7 @@ services:
       RPC_ALLOW_IP: "0.0.0.0/0"
 
   mongo:
-    build: ./explorer/db
+    build: ../explorer/db
     restart: always
     environment:
       MONGO_INITDB_DATABASE: explorer_database
@@ -17,16 +17,18 @@ services:
       - "database_data:/data/db"
 
   explorer:
-    build: ./explorer/express
+    build: ../explorer/express
     restart: always
     depends_on:
       - mongo
       - pigeoncoin
     environment:
       BACK_URL: /
+    ports:
+      - "80:3001"
 
   seeder:
-    build: ./
+    build: ../seeder
     restart: always
     ports:
       - "53:53/udp"
