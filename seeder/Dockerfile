@@ -10,10 +10,9 @@ EXPOSE 53/udp
 
 WORKDIR /var/dnsseed
 
-ENTRYPOINT ["/usr/local/bin/dnsseed"]
 
 ENV NS_ADDRESS=seed.pigeoncoin.org
 ENV A_ADDRESS=dnsseed.pigeoncoin.org
 ENV EMAIL=contact@pigeoncoin.org
 
-CMD -h ${NS_ADDRESS} -n ${A_ADDRESS} -m ${EMAIL}
+ENTRYPOINT /usr/local/bin/dnsseed -h ${NS_ADDRESS} -n ${A_ADDRESS} -m ${EMAIL}
