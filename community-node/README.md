@@ -118,3 +118,9 @@ Mountain View, CA    173.212.247.217
 Visit http://vps.mydomain.org, where you will see a block Explorer.
 
 *Note: it will start showing blocks within 5 minutes of installation, but may take 5-7 days to fully sync.*
+
+
+Celebrate! 🎉
+=============
+
+You have just provided the community with a backup explorer and dns seeder. If you intend to leave this up for a year or longer, let us know and we'll add you to the hard-coded wallet seed nodes!
