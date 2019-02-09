@@ -13,7 +13,7 @@ services:
       - website
 
   pigeoncoin:
-    image: lukepighetti/pigeoncoin
+    image: lukepighetti/pigeoncoin:latest
     restart: always
     volumes:
       - "chain_data:/root/.pigeon"
