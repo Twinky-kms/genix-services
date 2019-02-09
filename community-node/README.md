@@ -15,7 +15,7 @@ Example
 ```
 Name     Type    TTL     Data
 vps      A       1h      167.99.98.134
-seed     NS      1d      vps.mydomain.org.
+seed     NS      1h      vps.mydomain.org.
 ```
 
 2\. Install & secure Docker
