@@ -3,6 +3,8 @@ Community Node
 
 This is a `docker-compose` service that sets up an Explorer and DNS Seeder. This allows community members to setup critical infrastructure in a very simple and robust fashion.
 
+I would like to recommend using Digital Ocean's $10/month instance with Ubuntu 16. We appreciate your contributions to the community!
+
 ***Note: Do not keep cryptocurrency on this service. These types of services are a constant target for hackers.***
 
 
