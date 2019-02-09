@@ -1,7 +1,7 @@
 version: "3"
 services:
   pigeoncoin:
-    image: lukepighetti/pigeoncoin
+    image: lukepighetti/pigeoncoin:latest
     restart: always
     volumes:
       - "chain_data:/root/.pigeon"
@@ -20,7 +20,8 @@ services:
     build: ./express
     restart: always
     ports:
-      - "3000:3001"
+      - "80:3001"
+      - "443:3001"
     depends_on:
       - mongo
       - pigeoncoin

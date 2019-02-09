@@ -6,7 +6,10 @@ WORKDIR /app
 COPY . .
 
 # Install app dependencies & build
-RUN npm install \
+
+# see https://github.com/npm/uid-number/issues/3#issuecomment-453736871 `set unsafe-perm true`
+RUN npm config set unsafe-perm true\
+  && npm install \
   && npm install -g pm2 \
   && npm run build
 

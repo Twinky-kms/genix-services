@@ -1,7 +1,7 @@
 version: "3"
 services:
   pigeoncoin:
-    image: lukepighetti/pigeoncoin
+    image: lukepighetti/pigeoncoin:latest
     restart: always
     volumes:
       - "chain_data:/root/.pigeon"
