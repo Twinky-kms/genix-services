@@ -72,7 +72,7 @@ Then edit `docker-compose.yml` to reflect your DNS settings.
 docker-compose up -d --build
 ```
 
-You'll see it build the service and then deploy it in the background. Well, that's about it! Take a break, possibly overnight, and confirm the functionality.
+You'll see it build the service and then deploy it in the background. Well, that's about it! Take a water break, and then confirm the functionality.
 
 Confirm functionality
 =====================
