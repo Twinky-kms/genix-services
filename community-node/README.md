@@ -1,7 +1,9 @@
 Community Node
 ======
 
-This is a `docker-compose` service that sets up an Explorer, Wallet, and DNS Seeder. This allows community members to setup critical infrastructure in a very simple and robust fashion.
+This is a `docker-compose` service that sets up an Explorer and DNS Seeder. This allows community members to setup critical infrastructure in a very simple and robust fashion.
+
+***Note: Do not keep cryptocurrency on this service. These types of services are a constant target for hackers.***
 
 
 1\. Register a domain
