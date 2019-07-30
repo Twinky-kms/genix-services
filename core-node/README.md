@@ -8,3 +8,11 @@ Setup is identical to `community-node` with the additional steps of
 adding `serviceAccountKey.json` from `pigeoncoin-api` firebase project to `api-collector/collector/src/`
 
 adding discord, bitly, and firebase keys to `bot/settings.json`
+
+# Updating
+
+```
+git pull origin master
+docker-compose build
+docker-compose up -d
+```
