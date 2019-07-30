@@ -51,7 +51,7 @@ services:
     environment:
       RPC_HOST: pigeoncoin
       FETCH_HISTORICAL_MINUTES: 5
-      RTDB_URL: https://scratch-project-9f138.firebaseio.com
+      RTDB_URL: https://pigeoncoin-api.firebaseio.com
 
   seeder:
     build: ../seeder
