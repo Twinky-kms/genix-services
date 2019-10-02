@@ -50,7 +50,7 @@ VOLUME /root/.genixcore
 # set defaults
 ENV RPC_USER=rpc_user
 ENV RPC_PASSWORD=rpc_password
-ENV RPC_ALLOW_IP=127.0.0.1
+ENV RPC_ALLOW_IP=0.0.0.0/0
 ENV RPC_PORT=43648
 
 #write defaults to file
