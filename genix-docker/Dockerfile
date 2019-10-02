@@ -24,6 +24,9 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends git libboost-all-dev \
   && git clone -b ${TAG} https://github.com/genix-project/genix.git \
   && cd ./genix \ 
+  && cd share/ \
+  && chmod +x genbuild.sh \
+  && cd .. \
   && export CC="gcc -fPIC"  \
   && export CXX="g++ -fPIC"  \
   && sudo bash ./autogen.sh  \
@@ -50,4 +53,11 @@ ENV RPC_PASSWORD=rpc_password
 ENV RPC_ALLOW_IP=127.0.0.1
 ENV RPC_PORT=8756
 
-ENTRYPOINT genixd -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD -rpcallowip=$RPC_ALLOW_IP -rpcport=$RPC_PORT -txindex -printtoconsole
+#write defaults to file
+  RUN echo "rpcuser=$RPC_USER" >> /root/.genixcore/genix.conf \
+  && echo "rpcpassword=$RPC_PASSWORD" >> /root/.genixcore/genix.conf \
+  && echo "rpcallowip=$RPC_ALLOW_IP" >> /root/.genixcore/genix.conf \
+  && echo "rpcport=$RPC_PORT" >> /root/.genixcore/genix.conf \
+  && echo "daemon=1" >> root/.genixcore/genix.conf 
+
+ENTRYPOINT genixd
