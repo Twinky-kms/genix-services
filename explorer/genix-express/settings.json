@@ -46,7 +46,7 @@
 
   // wallet settings
   "wallet": {
-    "host": "localhost",
+    "host": "genix",
     "port": 43648,
     "user": "rpc_user",
     "pass": "rpc_password"
