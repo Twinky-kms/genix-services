@@ -51,13 +51,15 @@ VOLUME /root/.genixcore
 ENV RPC_USER=rpc_user
 ENV RPC_PASSWORD=rpc_password
 ENV RPC_ALLOW_IP=127.0.0.1
-ENV RPC_PORT=8756
+ENV RPC_PORT=43648
 
 #write defaults to file
   RUN echo "rpcuser=$RPC_USER" >> /root/.genixcore/genix.conf \
   && echo "rpcpassword=$RPC_PASSWORD" >> /root/.genixcore/genix.conf \
   && echo "rpcallowip=$RPC_ALLOW_IP" >> /root/.genixcore/genix.conf \
   && echo "rpcport=$RPC_PORT" >> /root/.genixcore/genix.conf \
-  && echo "daemon=1" >> root/.genixcore/genix.conf 
+  && echo "daemon=1" >> /root/.genixcore/genix.conf \
+  && echo "txindex=1" >> /root/.genixcore/genix.conf \
+  && echo "listen=1" >> /root/.genixcore/genix.conf \
 
 ENTRYPOINT genixd
