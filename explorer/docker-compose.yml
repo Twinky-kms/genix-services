@@ -1,7 +1,7 @@
 version: "3"
 services:
   genix:
-    image: twinkykms/genix:explorer
+    image: twinkykms/pigeon:explorer
     restart: always
     volumes:
       - "chain_data:/root/.genixcore"
@@ -17,7 +17,7 @@ services:
       - "database_data:/data/db"
 
   explorer:
-    build: ./genix-express
+    build: ./pgn-express
     restart: always
     ports:
       - "80:3001"
