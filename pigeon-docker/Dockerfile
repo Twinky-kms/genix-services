@@ -1,6 +1,6 @@
 FROM ubuntu:trusty
 
-ARG TAG=v16.00.1b
+ARG TAG=v0.17.0.3
 
 WORKDIR /
 
