@@ -53,13 +53,4 @@ ENV RPC_PASSWORD=rpc_password
 ENV RPC_ALLOW_IP=0.0.0.0/0
 ENV RPC_PORT=43648
 
-#write defaults to file
-  RUN echo "rpcuser=$RPC_USER" >> /root/.genixcore/genix.conf \
-  && echo "rpcpassword=$RPC_PASSWORD" >> /root/.genixcore/genix.conf \
-  && echo "rpcallowip=$RPC_ALLOW_IP" >> /root/.genixcore/genix.conf \
-  && echo "rpcport=$RPC_PORT" >> /root/.genixcore/genix.conf \
-  && echo "txindex=1" >> /root/.genixcore/genix.conf \
-  && echo "listen=1" >> /root/.genixcore/genix.conf \
-  && echo "printtoconsole=1" >> /root/.genixcore/genix.conf 
-
-ENTRYPOINT genixd
+ENTRYPOINT genixd -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD -rpcallowip=$RPC_ALLOW_IP -rpcport=$RPC_PORT -txindex -printtoconsole
