@@ -49,7 +49,7 @@
 
   // wallet settings
   "wallet": {
-    "host": "pigeoncoin",
+    "host": "pigeon",
     "port": 8756,
     "user": "rpc_user",
     "pass": "rpc_password"
