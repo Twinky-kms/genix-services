@@ -4,7 +4,7 @@ services:
     image: twinkykms/pigeon:explorer
     restart: always
     volumes:
-      - "chain_data:/root/.genixcore"
+      - "chain_data:/root/.pigeon"
     environment:
       RPC_ALLOW_IP: "0.0.0.0/0"
 
