@@ -1,6 +1,6 @@
 version: "3"
 services:
-  genix:
+  pigeon:
     image: twinkykms/pigeon:explorer
     restart: always
     volumes:
@@ -24,7 +24,7 @@ services:
       - "443:3001"
     depends_on:
       - mongo
-      - genix
+      - pigeon
 
 volumes:
   chain_data:
