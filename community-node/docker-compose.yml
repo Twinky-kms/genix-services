@@ -1,6 +1,6 @@
 version: "3"
 services:
-  pigeoncoin:
+  pigeon:
     image: twinkykms/pigeon:explorer
     restart: always
     volumes:
@@ -21,7 +21,7 @@ services:
     restart: always
     depends_on:
       - mongo
-      - pigeoncoin
+      - pigeon
     environment:
       BACK_URL: /
     ports:
