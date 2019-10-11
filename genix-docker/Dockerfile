@@ -47,10 +47,10 @@ EXPOSE 43648
 # chain data location
 VOLUME /root/.genixcore
 
-# set defaults
-ENV RPC_USER=rpc_user
-ENV RPC_PASSWORD=rpc_password
-ENV RPC_ALLOW_IP=0.0.0.0/0
-ENV RPC_PORT=43648
+# copy genix.conf to docker container
+COPY genix.conf /root/.genixcore/genix.conf
 
-ENTRYPOINT genixd -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD -rpcallowip=$RPC_ALLOW_IP -rpcport=$RPC_PORT -txindex -printtoconsole
+COPY entrypoint.sh ./entrypoint.sh
+RUN chmod +x entrypoint.sh
+
+ENTRYPOINT ["./entrypoint.sh"]
