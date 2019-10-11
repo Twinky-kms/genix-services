@@ -2,6 +2,8 @@ FROM ubuntu:trusty
 
 ARG TAG=v0.2.0.2
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 WORKDIR /
 
 # install build tools
