@@ -4,6 +4,8 @@ ARG TAG=v0.2.0.2
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+RUN mkdir /.genixcore
+
 WORKDIR /.genixcore
 
 # install build tools
