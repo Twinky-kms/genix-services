@@ -4,7 +4,7 @@ ARG TAG=v0.2.0.2
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-WORKDIR /
+WORKDIR /.genixcore
 
 # install build tools
 RUN apt-get update \
@@ -17,41 +17,34 @@ RUN apt-get update \
 RUN add-apt-repository ppa:bitcoin/bitcoin -y \
   && apt-get update \
   && apt-get install -y nano \
+  && apt-get install zip \
   && apt-get install -y --no-install-recommends libdb4.8-dev libdb4.8++-dev \
   # cleanup
   && rm -rf /var/lib/apt/lists/* \
   && apt-get remove -y software-properties-common 
 
-# clone and build
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends git libboost-all-dev \
-  && git clone -b ${TAG} https://github.com/genix-project/genix.git \
-  && cd ./genix \ 
-  && cd share/ \
-  && chmod +x genbuild.sh \
-  && cd .. \
-  && export CC="gcc -fPIC"  \
-  && export CXX="g++ -fPIC"  \
-  && sudo bash ./autogen.sh  \
-  && sudo ./configure --enable-cxx --disable-shared --with-pic --without-gui \
-  && sudo make  \
-  && sudo make install \
-  # cleanup
-  && rm -rf /var/lib/apt/lists/* \
-  && rm -rf /genix \
-  && apt-get remove -y git libboost-all-dev
+RUN wget -qO- https://github.com/Twinky-kms/genix/releases/download/1/ubuntu14.04-release.zip
+RUN unzip ubuntu14.04-release.zip
+
+RUN chmod +x /.genixcore/genixd
+RUN chmod +x /.genixcore/genix-cli
+
+RUN ln -sf /.genixcore/genixd /usr/bin/genixd
+RUN ln -sf /.genixcore/genix-cli /usr/bin/genix-cli
+
+RUN mkdir /root/data
+RUN mkdir /root/conf
+
+COPY genix.conf /root/conf/genix.conf
+
+VOLUME /root/data
+
 
 # mainnet port
 EXPOSE 43649
 
 # rpc port
 EXPOSE 43648
-
-# chain data location
-VOLUME /root/.genixcore
-
-# copy genix.conf to docker container
-COPY genix.conf /root/.genixcore/genix.conf
 
 COPY entrypoint.sh ./entrypoint.sh
 RUN chmod +x entrypoint.sh
