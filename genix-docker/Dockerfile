@@ -14,6 +14,7 @@ RUN apt-get update \
 # install libdb
 RUN add-apt-repository ppa:bitcoin/bitcoin -y \
   && apt-get update \
+  && apt-get install -y nano \
   && apt-get install -y --no-install-recommends libdb4.8-dev libdb4.8++-dev \
   # cleanup
   && rm -rf /var/lib/apt/lists/* \
