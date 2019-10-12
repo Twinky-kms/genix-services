@@ -1,0 +1,28 @@
+{
+  "apps": [
+    {
+      "name": "explorer",
+      "script": "./bin/cluster",
+      "node_args": "--stack-size=10000",
+      "cron_restart": "30 21 * * 1",
+      "restart_delay": 10000
+    },
+    {
+      "name": "sync index update",
+      "script": "./scripts/sync.js",
+      "args": "index update",
+      "restart_delay": 60000
+    },
+    {
+      "name": "sync market",
+      "script": "./scripts/sync.js",
+      "args": "market",
+      "restart_delay": 180000
+    },
+    {
+      "name": "peers",
+      "script": "./scripts/peers.js",
+      "restart_delay": 300000
+    }
+  ]
+}
