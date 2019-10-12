@@ -1,0 +1,165 @@
+/*
+  This file must be valid JSON. But comments are allowed
+
+  Please edit settings.json, not settings.json.template
+*/
+{
+  // name your instance!
+  "title": "AustraliaCash Block Explorer",
+
+  "address": "127.0.0.1",
+
+  // coin name
+  "coin": "AustraliaCash",
+
+  // coin symbol
+  "symbol": "AUS",
+
+  // logo
+  "logo": "/images/logo.png",
+
+  // favicon
+  "favicon": "public/favicon.ico",
+
+  // Uses bootswatch themes (http://bootswatch.com/)
+  // Valid options:
+  //     Cerulean, Cosmo, Cyborg, Darkly, Flatly, Journal, Lumen, Paper,
+  //     Readable, Sandstone, Simplex, Slate, Spacelab, Superhero, United, Yeti
+  // theme (see /public/themes for available themes)
+  "theme": "Slate",
+
+  // port to listen for requests on.
+  "port" : 3001,
+
+  // database settings (MongoDB)
+  "dbsettings": {
+    "user": "aus_explorer",
+    "password": "dbpassword",
+    "database": "explorer_database",
+    "address": "mongo",
+    "port": 27017
+  },
+
+  //update script settings
+  "update_timeout": 10,
+  "check_timeout": 250,
+
+  // wallet settings
+  "wallet": {
+    "host": "auscash",
+    "port": 1985,
+    "user": "rpc_user",
+    "pass": "rpc_password"
+  },
+
+  // confirmations
+  "confirmations": 40,
+
+  // language settings
+  "locale": "locale/en.json",
+
+  // menu settings
+  "display": {
+    "api": true,
+    "markets": false,
+    "richlist": true,
+    "twitter": true,
+    "facebook": true,
+    "googleplus": true,
+    "youtube": false,
+    "search": true,
+    "movement": true,
+    "network": false
+  },
+
+  // index page (valid options for difficulty are POW, POS or Hybrid)
+  "index": {
+    "show_hashrate": true,
+    "difficulty": "POW",
+    "last_txs": 100
+  },
+
+  // ensure links on API page are valid
+  "api": {
+    "blockindex": 1525,
+    "blockhash": "890ce36bc5569e005d45c5845d9898c5e3f2163dec9f49e2ff19bb8e9efee02a",
+    "txhash": "a66bba81958852059b55c5c482b3f56ef45de4191b7b5ca268713c1444552fa1",
+    "address": "Sb5cAz5HHSpAJ4hF7D6dYEgU5DgSpNvo8n"
+  },
+
+  // market settings
+  //supported markets: bittrex, poloniex, yobit, empoex, bleutrade, cryptopia, ccex
+  //default market is loaded by default and determines last price in header
+  "markets": {
+    "coin": "",
+    "exchange": "",
+    "enabled": [""],
+    "cryptopia_id": "",
+    "ccex_key" : "",
+    "default": "0.0000110"
+  },
+
+  // richlist/top100 settings
+  "richlist": {
+    "distribution": true,
+    "received": true,
+    "balance": true
+  },
+  // movement page settings
+  // min amount: show transactions greater than this value
+  // low flag: greater than this value flagged yellow
+  // high flag: greater than this value flagged red
+  "movement": {
+    "min_amount": 100,
+    "low_flag": 5000,
+    "high_flag": 15000
+  },
+
+  // twitter, facebook, googleplus, youtube
+  "twitter": "CashAustralia",
+  "facebook": "AusCash",
+  "googleplus": "TvgxR77",
+  "youtube": "AusCash",
+
+  //genesis
+  "genesis_tx": "273a20070d7cb57e4c77354d8bd5e01c1cf7d96ad32d91a7b7d183e30da12ef5",
+  "genesis_block": "aa43989047f144331fc6400859c691b11c0e111ead1977511d340860c1c5ad1f",
+
+  //heavy (enable/disable additional heavy features)
+  "heavy": false,
+
+  //amount of txs to index per address (stores latest n txs)
+  "txcount": 100,
+
+  //show total sent & received on address page (set false if PoS)
+  "show_sent_received": true,
+
+  // how to calculate current coin supply
+  // COINBASE : total sent from coinbase (PoW)
+  // GETINFO : retreive from getinfo api call (PoS)
+  // HEAVY: retreive from heavys getsupply api call
+  // BALANCES : total of all address balances
+  // TXOUTSET : retreive from gettxoutsetinfo api call
+  "supply": "COINBASE",
+
+  // how to acquire network hashrate
+  // getnetworkhashps: uses getnetworkhashps api call, returns in GH/s
+  // netmhashps: uses getmininginfo.netmhashpsm returns in MH/s
+  "nethash": "getnetworkhashps",
+
+  // nethash unitd: sets nethash API return units
+  // valid options: "P" (PH/s), "T" (TH/s), "G" (GH/s), "M" (MH/s), "K" (KH/s)
+  "nethash_units": "M",
+
+  // Address labels
+  // example : "JhbrvAmM7kNpwA6wD5KoAsbtikLWWMNPcM": {"label": "This is a burn address", "type":"danger", "url":"http://example.com"}
+  // label (required) = test to display
+  // type (optional) = class of label, valid types: default, primary, warning, danger, success
+  // url (optional) = url to link to for more information
+  "labels": {
+  "AUWvA9fECkHG3Wswq9en5Tm9xFCRDsxxdw": {"label": "Dev Team", "type":"primary", "url":"https://australiacash.org"},
+  "SkQFezC5g4rAuxzE1wVknux5A3ZbpkFcTz": {"label": "Creators Original Coins", "type":"primary"},
+  "SZAM5RRg6MLTqE4qWYx7Xgp9CMqW2v3VwM": {"label": "Heart Research Donations", "type":"default"},
+  //  "JSWVXHWeYNknPdG9uDrcBoZHztKMFCsndw": {"label": "Cryptsy"}
+  }
+}
