@@ -30,10 +30,14 @@ html
             $("#difficulty").text(json.data[0].difficulty);
             $("#difficultyHybrid").text(json.data[0].difficultyHybrid);
             $("#hashrate").text(json.data[0].hashrate);
-            $("#lastPrice").text(json.data[0].lastPrice.toFixed(8));
+           // $("#lastPrice").text(json.data[0].lastPrice.toFixed(8));
             $("#lblConnections").text(json.data[0].connections + ' connections');
             $("#lblBlockcount").text(json.data[0].blockcount + ' blocks');
             $("#lblX1").text(' ');
+          }});
+          function update_btc(){
+          $.ajax({url: 'http://explorer.genix.cx:3000/ausprices/3', success: function(json_btc){
+              $("#lastPrice").text(parseFloat(json_btc.price).toFixed(8));
           }});
         }
         $('.block-last-next').tooltip({
