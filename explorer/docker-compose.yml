@@ -1,10 +1,10 @@
 version: "3"
 services:
-  genix:
-    image: twinkykms/genix:explorer
+  auscash:
+    image: twinkykms/australia-cash:explorer
     restart: always
     volumes:
-      - "chain_data:/root/.genixcore"
+      - "chain_data:/root/.australiacash"
     environment:
       RPC_ALLOW_IP: "0.0.0.0/0"
 
@@ -17,14 +17,14 @@ services:
       - "database_data:/data/db"
 
   explorer:
-    build: ./genix-express
+    build: ./aus-express
     restart: always
     ports:
       - "80:3001"
       - "443:3001"
     depends_on:
       - mongo
-      - genix
+      - auscash
 
 volumes:
   chain_data:
