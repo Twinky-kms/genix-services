@@ -1,5 +1,5 @@
 db.createUser({
-  user: "genix_explorer",
+  user: "aus_explorer",
   pwd: "dbpassword",
   roles: ["readWrite"]
 });
