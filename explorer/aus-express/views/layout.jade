@@ -35,6 +35,7 @@ html
             $("#lblBlockcount").text(json.data[0].blockcount + ' blocks');
             $("#lblX1").text(' ');
           }});
+        }
           function update_btc(){
           $.ajax({url: 'http://explorer.genix.cx:3000/ausprices/3', success: function(json_btc){
               $("#lastPrice").text(parseFloat(json_btc.price).toFixed(8));
