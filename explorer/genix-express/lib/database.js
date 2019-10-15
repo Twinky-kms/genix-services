@@ -17,7 +17,6 @@ var mongoose = require('mongoose')
   , empoex = require('./markets/empoex')
   , ccex = require('./markets/ccex')
   , coinexchange = require('./markets/coinexchange')
-  , swiftex = require('./markets/swiftex')
   , altmarket = require('./markets/altmarket');
 //  , BTC38 = require('./markets/BTC38');
 

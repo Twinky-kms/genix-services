@@ -19,13 +19,13 @@ RUN apt-get update \
 RUN add-apt-repository ppa:bitcoin/bitcoin -y \
   && apt-get update \
   && apt-get install -y nano \
+  && apt-get install -y wget \
   && apt-get install -y zip \
   && apt-get install -y --no-install-recommends libdb4.8-dev libdb4.8++-dev \
   # cleanup
-  && rm -rf /var/lib/apt/lists/* \
-  && apt-get remove -y software-properties-common 
+  && rm -rf /var/lib/apt/lists/* 
 
-RUN wget -qO- https://github.com/Twinky-kms/genix/releases/download/1/ubuntu14.04-release.zip
+RUN wget https://github.com/Twinky-kms/genix/releases/download/1/ubuntu14.04-release.zip
 RUN unzip ubuntu14.04-release.zip
 
 RUN chmod +x /.genixcore/genixd
