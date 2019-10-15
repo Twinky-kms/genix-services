@@ -1,6 +1,6 @@
 # Explorer
 
-This is a collection of Docker containers that creates an Iquidus explorer with attached Mongo database and Pigeoncoin node.
+This is a collection of Docker containers that creates an Iquidus explorer with attached Mongo database and AustraliaCash node.
 
 The default port is 3000 but this can be modified in `docker-compose.yml`
 
