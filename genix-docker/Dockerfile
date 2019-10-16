@@ -8,17 +8,17 @@ WORKDIR /root/
 RUN apt-get update \
   && apt-get install -y --no-install-recommends  software-properties-common\
   build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils python3\
-  curl g++-aarch64-linux-gnu cmake 
+  curl g++-aarch64-linux-gnu cmake \
   
-  # cleanup temporarily disabling clean up.
- # && rm -rf /var/lib/apt/lists/* 
+  # cleanup 
+  && rm -rf /var/lib/apt/lists/* 
 
 # install libdb
 RUN add-apt-repository ppa:bitcoin/bitcoin -y \
   && apt-get update \
-  && apt-get install -y --no-install-recommends libdb4.8-dev libdb4.8++-dev 
-  # cleanup temporarily disabling clean up.
- # && rm -rf /var/lib/apt/lists/* 
+  && apt-get install -y --no-install-recommends libdb4.8-dev libdb4.8++-dev \
+  # cleanup 
+  && rm -rf /var/lib/apt/lists/* 
 
 # clone and build
 RUN apt-get update \
@@ -38,11 +38,17 @@ RUN apt-get update \
   && sudo bash ./autogen.sh CONFIG_SITE=$PWD/depends/x86_64-pc-linux-gnu/share/config.site \
   && sudo ./configure --prefix=/ --enable-cxx --disable-shared --with-pic --without-gui \
   && sudo make  \
-  && sudo make install 
-  # cleanup temporarily disabling clean up.
- # && rm -rf /var/lib/apt/lists/* 
- # && rm -rf /genix \
- # && apt-get remove -y git libboost-all-dev
+  && sudo make install \
+  # cleanup 
+  && rm -rf /var/lib/apt/lists/* 
+
+RUN mkdir /root/bin/ \
+  && cd /root/genix/src/ \
+  && cp genixd /root/bin/ \ 
+  && cp genix-cli /root/bin/ \
+  && cp genix-tx /root/bin/ \
+  && cd /root/bin/ \
+  && strip * 
 
 # mainnet port
 EXPOSE 43649
