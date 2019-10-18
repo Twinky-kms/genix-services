@@ -36,7 +36,7 @@ RUN apt-get update \
   && export CC="gcc -fPIC"  \
   && export CXX="g++ -fPIC"  \
   && sudo bash ./autogen.sh CONFIG_SITE=$PWD/depends/x86_64-pc-linux-gnu/share/config.site \
-  && sudo ./configure --prefix=/ --enable-cxx --disable-shared --with-pic --without-gui \
+  && sudo ./configure --prefix=/ --enable-cxx --enable-shared --with-pic --without-gui \
   && sudo make  \
   && sudo make install \
   # cleanup 
