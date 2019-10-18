@@ -33,10 +33,8 @@ RUN apt-get update \
   && chmod +x config.sub \
   && sudo make \
   && cd .. \
-  && export CC="gcc -fPIC"  \
-  && export CXX="g++ -fPIC"  \
-  && sudo bash ./autogen.sh CONFIG_SITE=$PWD/depends/x86_64-pc-linux-gnu/share/config.site \
-  && sudo ./configure --prefix=/ --enable-cxx --enable-shared --with-pic --without-gui \
+  && sudo bash ./autogen.sh \
+  && sudo ./configure  --prefix=`pwd`/depends/x86_64-pc-linux-gnu --without-gui \
   && sudo make  \
   && sudo make install \
   # cleanup 
@@ -65,4 +63,4 @@ ENV RPC_PASSWORD=rpc_password
 ENV RPC_ALLOW_IP=0.0.0.0/0
 ENV RPC_PORT=43648
 
-ENTRYPOINT genixd -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD -rpcallowip=$RPC_ALLOW_IP -rpcport=$RPC_PORT -txindex -printtoconsole
+ENTRYPOINT /root/genix/depends/x86_64-pc-linux-gnu/bin/genixd -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD -rpcallowip=$RPC_ALLOW_IP -rpcport=$RPC_PORT -txindex -printtoconsole
