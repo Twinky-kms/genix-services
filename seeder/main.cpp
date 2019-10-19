@@ -400,18 +400,19 @@ extern "C" void* ThreadStats(void*) {
   return nullptr;
 }
 
-static const string mainnet_seeds[] = {"seed.pigeoncoin.org", "seed.x16s.org", "seed.pigeoncoin.cc", "pgndns1.pigeoncoin.cc", "pigeoncoin.online", "seed2.x16s.org", "seed2.pigeoncoin.org", 
-"165.231.161.6", 
-"77.55.234.131", 
-"186.155.133.212", 
-"125.24.78.57", 
-"115.59.201.182", 
-"95.91.245.82", 
-"101.51.127.98", 
-"171.99.161.103", 
-"1.0.188.126", 
-"109.252.148.252", 
+static const string mainnet_seeds[] = {"157.230.41.76", "", "", "", "", "", "",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
 ""};
+
 
 static const string testnet_seeds[] = {"testnet-seed.pigeoncoin.org", "testnet-seed.pigeoncoin.org", ""};
 static const string *seeds = mainnet_seeds;
