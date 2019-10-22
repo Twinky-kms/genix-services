@@ -4,9 +4,9 @@ ARG TAG=v0.2.0.2
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-RUN mkdir /.genixcore
+RUN mkdir /root/bin/
 
-WORKDIR /.genixcore
+WORKDIR /root/bin/
 
 # install build tools
 RUN apt-get update \
@@ -28,18 +28,18 @@ RUN add-apt-repository ppa:bitcoin/bitcoin -y \
 RUN wget https://github.com/Twinky-kms/genix/releases/download/1/genix-docker.zip
 RUN unzip genix-docker.zip
 
-RUN chmod +x /.genixcore/genixd
-RUN chmod +x /.genixcore/genix-cli
+RUN chmod +x /root/bin/genixd
+RUN chmod +x /root/bin/genix-cli
 
-RUN ln -sf /.genixcore/genixd /usr/bin/genixd
-RUN ln -sf /.genixcore/genix-cli /usr/bin/genix-cli
+RUN ln -sf /root/bin/genixd /usr/bin/genixd
+RUN ln -sf /root/bin/genix-cli /usr/bin/genix-cli
 
 RUN mkdir /root/data
 RUN mkdir /root/conf
 
-COPY genix.conf /root/conf/genix.conf
+COPY genix.conf /root/.genixcore/genix.conf
 
-VOLUME /root/.genixcore
+# VOLUME /root/.genixcore
 
 
 # mainnet port
