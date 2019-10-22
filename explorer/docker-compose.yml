@@ -1,7 +1,7 @@
 version: "3"
 services:
   genix:
-    image: genix-mn
+    build: ./genix-docker
     restart: always
     volumes:
       - "chain_data:/root/.genixcore"
