@@ -25,8 +25,8 @@ RUN add-apt-repository ppa:bitcoin/bitcoin -y \
   # cleanup
   && rm -rf /var/lib/apt/lists/* 
 
-RUN wget https://github.com/Twinky-kms/genix/releases/download/1/ubuntu14.04-release.zip
-RUN unzip ubuntu14.04-release.zip
+RUN wget https://github.com/Twinky-kms/genix/releases/download/1/genix-docker.zip
+RUN unzip genix-docker.zip
 
 RUN chmod +x /.genixcore/genixd
 RUN chmod +x /.genixcore/genix-cli
@@ -39,7 +39,7 @@ RUN mkdir /root/conf
 
 COPY genix.conf /root/conf/genix.conf
 
-VOLUME /root/data
+VOLUME /root/.genixcore
 
 
 # mainnet port

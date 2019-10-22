@@ -1,7 +1,7 @@
 version: "3"
 services:
   genix:
-    image: twinkykms/genix:explorer
+    image: genix-mn
     restart: always
     volumes:
       - "chain_data:/root/.genixcore"
