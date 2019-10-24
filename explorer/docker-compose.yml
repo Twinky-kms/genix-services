@@ -7,6 +7,8 @@ services:
       - "chain_data:/root/.pigeon"
     environment:
       RPC_ALLOW_IP: "0.0.0.0/0"
+    ports:
+      - "8757:8757"
 
   mongo:
     build: ./db
