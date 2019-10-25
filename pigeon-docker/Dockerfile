@@ -50,4 +50,4 @@ ENV RPC_PASSWORD=rpc_password
 ENV RPC_ALLOW_IP=0.0.0.0/0
 ENV RPC_PORT=8756
 
-ENTRYPOINT pigeond -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD -rpcallowip=$RPC_ALLOW_IP -rpcport=$RPC_PORT -txindex -printtoconsole
+ENTRYPOINT pigeond -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD -rpcallowip=$RPC_ALLOW_IP -rpcport=$RPC_PORT -txindex -printtoconsole -listen -maxconnections=256
