@@ -7,6 +7,8 @@ services:
       - "chain_data:/root/.genixcore"
     environment:
       RPC_ALLOW_IP: "0.0.0.0/0"
+    ports:
+      - "43649:43649"
 
   mongo:
     build: ./db
