@@ -2,9 +2,11 @@ var request = require('request')
   , settings = require('./settings')
   , Address = require('../models/address');
 
-var base_server = 'http://127.0.0.1:' + settings.port + "/";
+var base_url = 'http://127.0.0.1:' + settings.port + '/api/';
 
-var base_url = base_server + 'api/';
+const Client = require('bitcoin-core');
+const client = new Client(settings.wallet);
+
 
 // returns coinbase total sent as current coin supply
 function coinbase_supply(cb) {
@@ -17,169 +19,323 @@ function coinbase_supply(cb) {
   });
 }
 
+function rpcCommand(params, cb) {
+  client.command([{method: params[0].method, parameters: params[0].parameters}], function(err, response){
+    if(err){console.log('Error: ', err); }
+    else{
+      if(response[0].name == 'RpcError'){
+        return cb('There was an error. Check your console.');
+      }
+      return cb(response[0]);
+    }
+  });
+}
+
 module.exports = {
 
   convert_to_satoshi: function(amount, cb) {
     // fix to 8dp & convert to string
-    var fixed = amount.toFixed(8).toString();
-    // remove decimal (.) and return integer
+    var fixed = amount.toFixed(8).toString(); 
+    // remove decimal (.) and return integer 
     return cb(parseInt(fixed.replace('.', '')));
   },
 
   get_hashrate: function(cb) {
     if (settings.index.show_hashrate == false) return cb('-');
-    if (settings.nethash == 'netmhashps') {
-      var uri = base_url + 'getmininginfo';
-      request({uri: uri, json: true}, function (error, response, body) { //returned in mhash
-        if (body.netmhashps) {
-          if (settings.nethash_units == 'K') {
-            return cb((body.netmhashps * 1000).toFixed(4));
-          } else if (settings.nethash_units == 'G') {
-            return cb((body.netmhashps / 1000).toFixed(4));
-          } else if (settings.nethash_units == 'H') {
-            return cb((body.netmhashps * 1000000).toFixed(4));
-          } else if (settings.nethash_units == 'T') {
-            return cb((body.netmhashps / 1000000).toFixed(4));
-          } else if (settings.nethash_units == 'P') {
-            return cb((body.netmhashps / 1000000000).toFixed(4));
+    if (settings.use_rpc) {
+      if (settings.nethash == 'netmhashps') {
+        rpcCommand([{method:'getmininginfo', parameters: []}], function(response){
+          if (response == 'There was an error. Check your console.') { return cb(response);}
+          if (response.netmhashps) {
+            response.netmhashps = parseFloat(response.netmhashps);
+            if (settings.nethash_units == 'K') {
+              return cb((response.netmhashps * 1000).toFixed(4));
+            } else if (settings.nethash_units == 'G') {
+              return cb((response.netmhashps / 1000).toFixed(4));
+            } else if (settings.nethash_units == 'H') {
+              return cb((response.netmhashps * 1000000).toFixed(4));
+            } else if (settings.nethash_units == 'T') {
+              return cb((response.netmhashps / 1000000).toFixed(4));
+            } else if (settings.nethash_units == 'P') {
+              return cb((response.netmhashps / 1000000000).toFixed(4));
+            } else {
+              return cb(response.netmhashps.toFixed(4));
+            }
           } else {
-            return cb(body.netmhashps.toFixed(4));
+            return cb('-');
           }
-        } else {
-          return cb('-');
-        }
-      });
-    } else {
-      var uri = base_url + 'getnetworkhashps';
-      request({uri: uri, json: true}, function (error, response, body) {
-        if (body == 'There was an error. Check your console.') {
-          return cb('-');
-        } else {
-          if (settings.nethash_units == 'K') {
-            return cb((body / 1000).toFixed(4));
-          } else if (settings.nethash_units == 'M'){
-            return cb((body / 1000000).toFixed(4));
-          } else if (settings.nethash_units == 'G') {
-            return cb((body / 1000000000).toFixed(4));
-          } else if (settings.nethash_units == 'T') {
-            return cb((body / 1000000000000).toFixed(4));
-          } else if (settings.nethash_units == 'P') {
-            return cb((body / 1000000000000000).toFixed(4));
+        });
+      } else {
+        rpcCommand([{method:'getnetworkhashps', parameters: []}], function(response){
+          if (response == 'There was an error. Check your console.') { return cb(response);}
+            if (response) {
+              response = parseFloat(response);
+              if (settings.nethash_units == 'K') {
+                return cb((response / 1000).toFixed(4));
+              } else if (settings.nethash_units == 'M'){
+                return cb((response / 1000000).toFixed(4));
+              } else if (settings.nethash_units == 'G') {
+                return cb((response / 1000000000).toFixed(4));
+              } else if (settings.nethash_units == 'T') {
+                return cb((response / 1000000000000).toFixed(4));
+              } else if (settings.nethash_units == 'P') {
+                return cb((response / 1000000000000000).toFixed(4));
+              } else {
+                return cb((response).toFixed(4));
+              }
+            } else {
+              return cb('-');
+            }
+        });
+      }
+    }else{
+      if (settings.nethash == 'netmhashps') {
+        var uri = base_url + 'getmininginfo';
+        request({uri: uri, json: true}, function (error, response, body) { //returned in mhash
+          if (body.netmhashps) {
+            if (settings.nethash_units == 'K') {
+              return cb((body.netmhashps * 1000).toFixed(4));
+            } else if (settings.nethash_units == 'G') {
+              return cb((body.netmhashps / 1000).toFixed(4));
+            } else if (settings.nethash_units == 'H') {
+              return cb((body.netmhashps * 1000000).toFixed(4));
+            } else if (settings.nethash_units == 'T') {
+              return cb((body.netmhashps / 1000000).toFixed(4));
+            } else if (settings.nethash_units == 'P') {
+              return cb((body.netmhashps / 1000000000).toFixed(4));
+            } else {
+              return cb(body.netmhashps.toFixed(4));
+            }
           } else {
-            return cb((body).toFixed(4));
+            return cb('-');
           }
-        }
-      });
+        });
+      } else {
+        var uri = base_url + 'getnetworkhashps';
+        request({uri: uri, json: true}, function (error, response, body) {
+          if (body == 'There was an error. Check your console.') {
+            return cb('-');
+          } else {
+            if (settings.nethash_units == 'K') {
+              return cb((body / 1000).toFixed(4));
+            } else if (settings.nethash_units == 'M'){
+              return cb((body / 1000000).toFixed(4));
+            } else if (settings.nethash_units == 'G') {
+              return cb((body / 1000000000).toFixed(4));
+            } else if (settings.nethash_units == 'T') {
+              return cb((body / 1000000000000).toFixed(4));
+            } else if (settings.nethash_units == 'P') {
+              return cb((body / 1000000000000000).toFixed(4));
+            } else {
+              return cb((body).toFixed(4));
+            }
+          }
+        });
+      }
     }
   },
 
 
   get_difficulty: function(cb) {
-    var uri = base_url + 'getdifficulty';
-    request({uri: uri, json: true}, function (error, response, body) {
-      return cb(body);
-    });
+    if (settings.use_rpc) {
+      rpcCommand([{method:'getdifficulty', parameters: []}], function(response){
+        return cb(response);
+      });
+    } else {
+      var uri = base_url + 'getdifficulty';
+      request({uri: uri, json: true}, function (error, response, body) {
+        return cb(body);
+      });
+    }
   },
 
   get_connectioncount: function(cb) {
-    var uri = base_url + 'getconnectioncount';
-    request({uri: uri, json: true}, function (error, response, body) {
-      return cb(body);
-    });
-  },
-
-  get_masternodecount: function(cb) {
-    var uri = base_url + 'getmasternodecount';
-    request({uri: uri, json: true}, function (error, response, body) {
-      return cb(body);
-    });
-  },
-
-  get_masternodecountonline: function(cb) {
-    var uri = base_url + 'getmasternodecountonline';
-    request({uri: uri, json: true}, function (error, response, body) {
-      return cb(body);
-    });
+    if (settings.use_rpc) {
+      rpcCommand([{method:'getconnectioncount', parameters: []}], function(response){
+        return cb(response);
+      });
+    } else {
+      var uri = base_url + 'getconnectioncount';
+      request({uri: uri, json: true}, function (error, response, body) {
+        return cb(body);
+      });
+    }
   },
 
   get_blockcount: function(cb) {
-    var uri = base_url + 'getblockcount';
-    request({uri: uri, json: true}, function (error, response, body) {
-      return cb(body);
-    });
+    if (settings.use_rpc) {
+      rpcCommand([{method:'getblockcount', parameters: []}], function(response){
+        return cb(response);
+      })
+    } else {
+      var uri = base_url + 'getblockcount';
+      request({uri: uri, json: true}, function (error, response, body) {
+        return cb(body);
+      });
+    }
   },
 
   get_blockhash: function(height, cb) {
-    var uri = base_url + 'getblockhash?height=' + height;
-    request({uri: uri, json: true}, function (error, response, body) {
-      return cb(body);
-    });
+    if (settings.use_rpc) {
+      rpcCommand([{method:'getblockhash', parameters: [parseInt(height)]}], function(response){
+        return cb(response);
+      });
+    } else {
+      var uri = base_url + 'getblockhash?height=' + height;
+      request({uri: uri, json: true}, function (error, response, body) {
+        return cb(body);
+      });
+    }
   },
 
   get_block: function(hash, cb) {
-    var uri = base_url + 'getblock?hash=' + hash;
-    request({uri: uri, json: true}, function (error, response, body) {
-      return cb(body);
-    });
+    if (settings.use_rpc) {
+      rpcCommand([{method:'getblock', parameters: [hash]}], function(response){
+        return cb(response);
+      });
+    } else {
+      var uri = base_url + 'getblock?hash=' + hash;
+      request({uri: uri, json: true}, function (error, response, body) {
+        return cb(body);
+      });
+    }
   },
 
   get_rawtransaction: function(hash, cb) {
-    var uri = base_url + 'getrawtransaction?txid=' + hash + '&decrypt=1';
-    request({uri: uri, json: true}, function (error, response, body) {
-      return cb(body);
-    });
+    if (settings.use_rpc) {
+      rpcCommand([{method:'getrawtransaction', parameters: [hash, 1]}], function(response){
+        return cb(response);
+      });
+    } else {
+      var uri = base_url + 'getrawtransaction?txid=' + hash + '&decrypt=1';
+      request({uri: uri, json: true}, function (error, response, body) {
+        return cb(body);
+      });
+    }
   },
 
   get_maxmoney: function(cb) {
-    var uri = base_url + 'getmaxmoney';
-    request({uri: uri, json: true}, function (error, response, body) {
-      return cb(body);
-    });
+    if (settings.use_rpc) {
+      rpcCommand([{method:'getmaxmoney', parameters: []}], function(response){
+        return cb(response);
+      });
+    } else {
+      var uri = base_url + 'getmaxmoney';
+      request({uri: uri, json: true}, function (error, response, body) {
+        return cb(body);
+      });
+    }
   },
 
   get_maxvote: function(cb) {
-    var uri = base_url + 'getmaxvote';
-    request({uri: uri, json: true}, function (error, response, body) {
-      return cb(body);
-    });
+    if (settings.use_rpc) {
+      rpcCommand([{method:'getmaxvote', parameters: []}], function(response){
+        return cb(response);
+      });
+    } else {
+      var uri = base_url + 'getmaxvote';
+      request({uri: uri, json: true}, function (error, response, body) {
+        return cb(body);
+      }); 
+    }
   },
 
   get_vote: function(cb) {
-    var uri = base_url + 'getvote';
-    request({uri: uri, json: true}, function (error, response, body) {
-      return cb(body);
-    });
+    if (settings.use_rpc) {
+      client.command([{method:'getvote', parameters: []}], function(err, response){
+        if(err){console.log('Error: ', err); }
+        else{
+          if(response[0].name == 'RpcError'){
+            return cb('There was an error. Check your console.');
+          }
+          return cb(response[0]);
+        }
+      });
+    } else {
+      var uri = base_url + 'getvote';
+      request({uri: uri, json: true}, function (error, response, body) {
+        return cb(body);
+      }); 
+    }
   },
 
   get_phase: function(cb) {
-    var uri = base_url + 'getphase';
-    request({uri: uri, json: true}, function (error, response, body) {
-      return cb(body);
-    });
+    if (settings.use_rpc) {
+      client.command([{method:'getphase', parameters: []}], function(err, response){
+        if(err){console.log('Error: ', err); }
+        else{
+          if(response[0].name == 'RpcError'){
+            return cb('There was an error. Check your console.');
+          }
+          return cb(response[0]);
+        }
+      });
+    } else {
+      var uri = base_url + 'getphase';
+      request({uri: uri, json: true}, function (error, response, body) {
+        return cb(body);
+      }); 
+    }
   },
 
   get_reward: function(cb) {
-    var uri = base_url + 'getreward';
-    request({uri: uri, json: true}, function (error, response, body) {
-      return cb(body);
-    });
+    if (settings.use_rpc) {
+      client.command([{method:'getreward', parameters: []}], function(err, response){
+        if(err){console.log('Error: ', err); }
+        else{
+          if(response[0].name == 'RpcError'){
+            return cb('There was an error. Check your console.');
+          }
+          return cb(response[0]);
+        }
+      });
+    } else {
+      var uri = base_url + 'getreward';
+      request({uri: uri, json: true}, function (error, response, body) {
+        return cb(body);
+      }); 
+    }
   },
 
   get_estnext: function(cb) {
-    var uri = base_url + 'getnextrewardestimate';
-    request({uri: uri, json: true}, function (error, response, body) {
-      return cb(body);
-    });
+    if (settings.use_rpc) {
+      client.command([{method:'getnextrewardestimate', parameters: []}], function(err, response){
+        if(err){console.log('Error: ', err); }
+        else{
+          if(response[0].name == 'RpcError'){
+            return cb('There was an error. Check your console.');
+          }
+          return cb(response[0]);
+        }
+      });
+    } else {
+      var uri = base_url + 'getnextrewardestimate';
+      request({uri: uri, json: true}, function (error, response, body) {
+        return cb(body);
+      }); 
+    }
   },
 
   get_nextin: function(cb) {
-    var uri = base_url + 'getnextrewardwhenstr';
-    request({uri: uri, json: true}, function (error, response, body) {
-      return cb(body);
-    });
+    if (settings.use_rpc) {
+      client.command([{method:'getnextrewardwhenstr', parameters: []}], function(err, response){
+        if(err){console.log('Error: ', err); }
+        else{
+          if(response[0].name == 'RpcError'){
+            return cb('There was an error. Check your console.');
+          }
+          return cb(response[0]);
+        }
+      });
+    } else {
+      var uri = base_url + 'getnextrewardwhenstr';
+      request({uri: uri, json: true}, function (error, response, body) {
+        return cb(body);
+      }); 
+    }
   },
-
-  // synchonous loop used to interate through an array,
+  
+  // synchonous loop used to interate through an array, 
   // avoid use unless absolutely neccessary
   syncLoop: function(iterations, process, exit){
     var index = 0,
@@ -222,7 +378,7 @@ module.exports = {
   },
 
   balance_supply: function(cb) {
-    Address.find({}, 'balance').where('balance').gt(0).exec(function(err, docs) {
+    Address.find({}, 'balance').where('balance').gt(0).exec(function(err, docs) { 
       var count = 0;
       module.exports.syncLoop(docs.length, function (loop) {
         var i = loop.iteration();
@@ -235,29 +391,71 @@ module.exports = {
   },
 
   get_supply: function(cb) {
-    if ( settings.supply == 'HEAVY' ) {
-      var uri = base_url + 'getsupply';
-      request({uri: uri, json: true}, function (error, response, body) {
-        return cb(body);
-      });
-    } else if (settings.supply == 'GETINFO') {
-      var uri = base_url + 'getinfo';
-      request({uri: uri, json: true}, function (error, response, body) {
-        return cb(body.moneysupply);
-      });
-    } else if (settings.supply == 'BALANCES') {
-      module.exports.balance_supply(function(supply) {
-        return cb(supply/100000000);
-      });
-    } else if (settings.supply == 'TXOUTSET') {
-      var uri = base_url + 'gettxoutsetinfo';
-      request({uri: uri, json: true}, function (error, response, body) {
-        return cb(body.total_amount);
-      });
+    if (settings.use_rpc) {
+      if ( settings.supply == 'HEAVY' ) {
+        client.command([{method:'getsupply', parameters: []}], function(err, response){
+          if(err){console.log('Error: ', err); }
+          else{
+            if(response[0].name == 'RpcError'){
+              return cb('There was an error. Check your console.');
+            }
+            return cb(response[0]);
+          }
+        });
+      } else if (settings.supply == 'GETINFO') {
+        client.command([{method:'getinfo', parameters: []}], function(err, response){
+          if(err){console.log('Error: ', err); }
+          else{
+            if(response[0].name == 'RpcError'){
+              return cb('There was an error. Check your console.');
+            }
+            return cb(response[0].moneysupply);
+          }
+        });
+      } else if (settings.supply == 'BALANCES') {
+        module.exports.balance_supply(function(supply) {
+          return cb(supply/100000000);
+        });
+      } else if (settings.supply == 'TXOUTSET') {
+        client.command([{method:'gettxoutsetinfo', parameters: []}], function(err, response){
+          if(err){console.log('Error: ', err); }
+          else{
+            if(response[0].name == 'RpcError'){
+              return cb('There was an error. Check your console.');
+            }
+            return cb(response[0].total_amount);
+          }
+        });
+      } else {
+        coinbase_supply(function(supply) {
+          return cb(supply/100000000);
+        });
+      }
     } else {
-      coinbase_supply(function(supply) {
-        return cb(supply/100000000);
-      });
+      if ( settings.supply == 'HEAVY' ) {
+        var uri = base_url + 'getsupply';
+        request({uri: uri, json: true}, function (error, response, body) {
+          return cb(body);
+        });
+      } else if (settings.supply == 'GETINFO') {
+        var uri = base_url + 'getinfo';
+        request({uri: uri, json: true}, function (error, response, body) {
+          return cb(body.moneysupply);
+        });
+      } else if (settings.supply == 'BALANCES') {
+        module.exports.balance_supply(function(supply) {
+          return cb(supply/100000000);
+        });
+      } else if (settings.supply == 'TXOUTSET') {
+        var uri = base_url + 'gettxoutsetinfo';
+        request({uri: uri, json: true}, function (error, response, body) {
+          return cb(body.total_amount);
+        });
+      } else {
+        coinbase_supply(function(supply) {
+          return cb(supply/100000000);
+        });
+      }
     }
   },
 
@@ -299,7 +497,7 @@ module.exports = {
     module.exports.syncLoop(vout.length, function (loop) {
       var i = loop.iteration();
       // make sure vout has an address
-      if (vout[i].scriptPubKey.type != 'nonstandard' && vout[i].scriptPubKey.type != 'nulldata') {
+      if (vout[i].scriptPubKey.type != 'nonstandard' && vout[i].scriptPubKey.type != 'nulldata') { 
         // check if vout address is unique, if so add it array, if not add its amount to existing index
         //console.log('vout:' + i + ':' + txid);
         module.exports.is_unique(arr_vout, vout[i].scriptPubKey.addresses[0], function(unique, index) {
@@ -347,7 +545,7 @@ module.exports = {
       var amount = 0;
       module.exports.syncLoop(vout.length, function (loop) {
         var i = loop.iteration();
-          amount = amount + parseFloat(vout[i].value);
+          amount = amount + parseFloat(vout[i].value);  
           loop.next();
       }, function(){
         addresses.push({hash: 'coinbase', amount: amount});
@@ -361,14 +559,14 @@ module.exports = {
             if (tx.vout[i].n == input.vout) {
               //module.exports.convert_to_satoshi(parseFloat(tx.vout[i].value), function(amount_sat){
               if (tx.vout[i].scriptPubKey.addresses) {
-                addresses.push({hash: tx.vout[i].scriptPubKey.addresses[0], amount:tx.vout[i].value});
+                addresses.push({hash: tx.vout[i].scriptPubKey.addresses[0], amount:tx.vout[i].value});  
               }
                 loop.break(true);
                 loop.next();
               //});
             } else {
               loop.next();
-            }
+            } 
           }, function(){
             return cb(addresses);
           });

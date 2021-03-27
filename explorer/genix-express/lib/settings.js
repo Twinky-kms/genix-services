@@ -21,23 +21,23 @@ exports.logo = "/images/logo.png";
 exports.favicon = "favicon.ico";
 
 //Theme
-exports.theme = "Slate";
+exports.theme = "Cyborg";
 
 //The Port ep-lite should listen to
 exports.port = process.env.PORT || 3001;
 
 
 //coin symbol, visible e.g. MAX, LTC, HVC
-exports.symbol = "CHC";
+exports.symbol = "BTC";
 
 
 //coin name, visible e.g. in the browser window
-exports.coin = "Chaincoin";
+exports.coin = "Bitcoin";
 
 
 //This setting is passed to MongoDB to set up the database
 exports.dbsettings = {
-  "user": "ciquidus",
+  "user": "iquidus",
   "password": "3xp!0reR",
   "database": "blockchaindb",
   "address" : "localhost",
@@ -47,9 +47,9 @@ exports.dbsettings = {
 
 //This setting is passed to the wallet
 exports.wallet = { "host" : "127.0.0.1",
-  "port" : 11995,
-  "user" : "chaincoinrpc",
-  "pass" : "password"
+  "port" : 8669,
+  "username" : "bitcoinrpc",
+  "password" : "password"
 };
 
 
@@ -64,10 +64,7 @@ exports.display = {
   "twitter": true,
   "facebook": false,
   "googleplus": false,
-  "bitcointalk": false,
-  "website": false,
-  "slack": false,
-  "github": false,
+  "youtube": false,
   "search": true,
   "richlist": true,
   "movement": true,
@@ -78,18 +75,17 @@ exports.display = {
 //API view
 exports.api = {
   "blockindex": 1337,
-  "blockhash": "00000000001b8c30360db57b575b3c2bf668b0ed50683f567afd47ae1773efb8",
-  "txhash": "285feead54e322aa69f649c4078766171df358a12f5f1517d61f303780e25511",
-  "address": "CaxX1HVWzbQ516w61XbtHR63vNmp2mvLMZ",
+  "blockhash": "00000000002db22bd47bd7440fcad99b4af5f3261b7e6bd23b7be911e98724f7",
+  "txhash": "c251b0f894193dd55664037cbf4a11fcd018ae3796697b79f5097570d7de95ae",
+  "address": "RBiXWscC63Jdn1GfDtRj8hgv4Q6Zppvpwb",
 };
 
 // markets
 exports.markets = {
-  "coin": "CHC",
+  "coin": "JBS",
   "exchange": "BTC",
-  "enabled": ['cryptopia'],
-  "cryptopia_id": "2186",
-  "default": "cryptopia"
+  "enabled": ['bittrex'],
+  "default": "bittrex"
 };
 
 // richlist/top100 settings
@@ -108,34 +104,38 @@ exports.movement = {
 //index
 exports.index = {
   "show_hashrate": false,
+  "show_market_cap": false,
+  "show_market_cap_over_price": false,
   "difficulty": "POW",
-  "last_txs": 100
+  "last_txs": 100,
+  "txs_per_page": 10
 };
 
 // twitter
-exports.twitter = "suprnurd";
+exports.twitter = "iquidus";
 exports.facebook = "yourfacebookpage";
 exports.googleplus = "yourgooglepluspage";
-exports.bitcointalk = "yourbitcointalktopicvalue";
-exports.website = "yourcompletewebsiteurlincludingtheprotocol";
-exports.slack = "yourcompleteslackinviteurlincludingtheprotocol";
-exports.github = "yourgithubaccount/repo";
+exports.youtube = "youryoutubechannel";
 
 exports.confirmations = 6;
 
 //timeouts
 exports.update_timeout = 125;
 exports.check_timeout = 250;
+exports.block_parallel_tasks = 1;
 
 
 //genesis
-exports.genesis_tx = "fa6ef9872494fa9662cf0fecf8c0135a6932e76d7a8764e1155207f3205c7c88";
-exports.genesis_block = "00000f639db5734b2b861ef8dbccc33aebd7de44d13de000a12d093bcc866c64";
+exports.genesis_tx = "65f705d2f385dc85763a317b3ec000063003d6b039546af5d8195a5ec27ae410";
+exports.genesis_block = "b2926a56ca64e0cd2430347e383f63ad7092f406088b9b86d6d68c2a34baef51";
 
+exports.use_rpc = false;
 exports.heavy = false;
+exports.lock_during_index = false;
 exports.txcount = 100;
+exports.txcount_per_page = 50;
 exports.show_sent_received = true;
-exports.supply = "TXOUTSET";
+exports.supply = "COINBASE";
 exports.nethash = "getnetworkhashps";
 exports.nethash_units = "G";
 

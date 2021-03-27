@@ -1,24 +1,33 @@
 Note: All updates require the explorer to be restarted
 
+1.7.2 -> 1.7.3
+* Reindex explorerdb (node --stack-size=15000 scripts/sync.js index reindex) required for Historical Address Balance
+* Add new settings to settings.json (see settings.json.template)
+  * show_market_cap
+  * show_market_cap_over_price
+
 1.7.1 -> 1.7.2
-* Updated dependency to chaincoin-node-api to support masternode count in 0.16 code
+* Add new settings to settings.json (see settings.json.template)
+  * block_parallel_tasks
 
 1.7.0 -> 1.7.1
-* Added full masternodelist
-* Added masternode votes (undocumented)
-* Fixed missing getpeerinfo from heavy settings
+* nothing required
 
 1.6.2 -> 1.7.0
-* Added master node count
-* Added chaincoin-json-api and node-chaincoin modules
-* added website link (see settings.json.template)
-* moved logo to api page
+* Update node (v12 is advised)
+* Update mongodb (4.2.x is advised)
+* Change settings in settings.json (see settings.json.template)
+  * wallet.user -> wallet.username
+  * wallet.pass -> wallet.password
 
 1.6.1 -> 1.6.2
-* Added bitcointalk, slack, and github links (see settings.json.template)
-* Added super hacky forcesync scripts to enable syncing newest blocks during initial database sync
-* Fixed facebook and google plus buttons not loading from settings.json
-* Added some basic Chaincoin love
+* remove tmp/db_index.pid (if it exists)
+* Add new settings to settings.json (see settings.json.template)
+  * lock_during_index
+  * use_rpc
+  * txcount_per_page
+  * index.txs_per_page
+* Reindex explorerdb (node --stack-size=15000 scripts/sync.js index reindex) to build new address TX collection
 
 1.6.0 -> 1.6.1
 * Add new cryptsy_id and hashrate_units settings (see settings.json.template)
